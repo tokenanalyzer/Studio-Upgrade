@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { ArrowRight, ArrowUpRight, Sparkles, Code2, Cloud, Pen, Cpu } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Sparkles, Code2, Cloud, Bot, Smartphone } from "lucide-react";
 import OrbErrorBoundary from "./OrbErrorBoundary";
 import FallbackOrb from "./FallbackOrb";
 
@@ -8,16 +8,11 @@ const GlassOrb = lazy(() => import("./GlassOrb"));
 const serviceTags = [
   { icon: Code2, label: "Web Development" },
   { icon: Cloud, label: "SaaS Platforms" },
-  { icon: Pen, label: "UI/UX Design" },
-  { icon: Cpu, label: "AI Integration" },
+  { icon: Bot, label: "AI Agents" },
+  { icon: Smartphone, label: "Mobile Apps" },
 ];
 
-const avatarColors = [
-  { bg: "#DBEAFE", text: "#2563EB", letter: "A" },
-  { bg: "#FCE7F3", text: "#DB2777", letter: "B" },
-  { bg: "#D1FAE5", text: "#059669", letter: "C" },
-  { bg: "#FEF3C7", text: "#D97706", letter: "D" },
-];
+const avatarEmojis = ["👨‍💻", "🚀", "⚡", "🎯"];
 
 function scrollTo(id: string) {
   const el = document.querySelector(id);
@@ -33,98 +28,99 @@ export default function HeroSection() {
         minHeight: "100vh",
         background: "white",
         overflow: "hidden",
-        paddingTop: "80px",
+        paddingTop: "72px",
+        display: "flex",
+        alignItems: "center",
       }}
     >
       {/* Background glow blobs */}
       <div style={{
-        position: "absolute", top: "10%", right: "5%",
-        width: "600px", height: "600px",
-        background: "radial-gradient(circle, rgba(219,234,254,0.5) 0%, transparent 70%)",
-        borderRadius: "50%", filter: "blur(40px)", pointerEvents: "none",
+        position: "absolute", top: "5%", right: "0%",
+        width: "550px", height: "550px",
+        background: "radial-gradient(circle, rgba(219,234,254,0.55) 0%, transparent 70%)",
+        borderRadius: "50%", filter: "blur(50px)", pointerEvents: "none",
       }} />
       <div style={{
-        position: "absolute", bottom: "15%", left: "8%",
-        width: "400px", height: "400px",
+        position: "absolute", bottom: "10%", left: "5%",
+        width: "350px", height: "350px",
         background: "radial-gradient(circle, rgba(224,242,254,0.4) 0%, transparent 70%)",
         borderRadius: "50%", filter: "blur(40px)", pointerEvents: "none",
       }} />
       <div style={{
-        position: "absolute", top: "35%", left: "30%",
-        width: "250px", height: "250px",
+        position: "absolute", top: "40%", left: "40%",
+        width: "200px", height: "200px",
         background: "radial-gradient(circle, rgba(237,233,254,0.3) 0%, transparent 70%)",
-        borderRadius: "50%", filter: "blur(40px)", pointerEvents: "none",
+        borderRadius: "50%", filter: "blur(30px)", pointerEvents: "none",
       }} />
 
       {/* Floating particles */}
-      {[0,1,2,3,4,5].map((i) => (
+      {[0,1,2,3,4].map((i) => (
         <div key={i} style={{
           position: "absolute",
-          width: "8px", height: "8px",
-          background: "#BFDBFE",
+          width: i % 2 === 0 ? "7px" : "5px",
+          height: i % 2 === 0 ? "7px" : "5px",
+          background: i % 3 === 0 ? "#BFDBFE" : "#DDD6FE",
           borderRadius: "50%",
-          left: `${15 + i * 14}%`,
-          top: `${20 + (i % 3) * 22}%`,
-          animation: `particle-float ${6 + i}s ease-in-out infinite`,
-          animationDelay: `${i * 0.8}s`,
-          opacity: 0.35,
+          left: `${10 + i * 17}%`,
+          top: `${25 + (i % 3) * 20}%`,
+          animation: `particle-float ${5 + i * 0.8}s ease-in-out infinite`,
+          animationDelay: `${i * 0.6}s`,
+          opacity: 0.4,
           pointerEvents: "none",
         }} />
       ))}
 
-      <div className="section-padding" style={{ position: "relative", zIndex: 10 }}>
+      <div className="section-padding" style={{ position: "relative", zIndex: 10, width: "100%", paddingTop: "2rem", paddingBottom: "2rem" }}>
         <div className="container-wide">
           <div style={{
             display: "grid",
             gridTemplateColumns: "1fr",
-            gap: "3rem",
-            minHeight: "calc(100vh - 80px)",
+            gap: "2rem",
             alignItems: "center",
           }}
             className="hero-grid"
           >
             <style>{`
               @media (min-width: 1024px) {
-                .hero-grid { grid-template-columns: 1fr 1fr !important; gap: 2rem !important; }
+                .hero-grid { grid-template-columns: 55fr 45fr !important; gap: 1rem !important; }
               }
-              .hero-text { animation: heroSlideIn 0.8s ease-out both; }
+              .hero-text { animation: heroSlideIn 0.7s ease-out both; }
               @keyframes heroSlideIn {
-                from { opacity: 0; transform: translateX(-40px); }
+                from { opacity: 0; transform: translateX(-30px); }
                 to { opacity: 1; transform: translateX(0); }
               }
-              .hero-orb { animation: heroFadeScale 0.9s ease-out 0.3s both; }
+              .hero-orb { animation: heroFadeScale 0.8s ease-out 0.25s both; }
               @keyframes heroFadeScale {
-                from { opacity: 0; transform: scale(0.85); }
+                from { opacity: 0; transform: scale(0.9); }
                 to { opacity: 1; transform: scale(1); }
               }
             `}</style>
 
             {/* Left — Content */}
-            <div className="hero-text" style={{ paddingTop: "1rem" }}>
-
+            <div className="hero-text">
               {/* Badge */}
               <div style={{
                 display: "inline-flex", alignItems: "center", gap: "8px",
-                padding: "8px 16px", borderRadius: "999px",
+                padding: "7px 16px", borderRadius: "999px",
                 background: "#EFF6FF", border: "1px solid #BFDBFE",
-                marginBottom: "2rem",
-                animation: "heroSlideIn 0.5s ease-out 0.2s both",
+                marginBottom: "1.5rem",
+                animation: "heroSlideIn 0.5s ease-out 0.1s both",
               }}>
-                <Sparkles size={14} style={{ color: "#2563EB" }} />
-                <span style={{ fontSize: "0.85rem", fontWeight: 500, color: "#2563EB" }}>
+                <Sparkles size={13} style={{ color: "#2563EB" }} />
+                <span style={{ fontSize: "0.82rem", fontWeight: 600, color: "#2563EB" }}>
                   Digital Solutions That Drive Growth
                 </span>
               </div>
 
               {/* Headline */}
               <h1 style={{
-                fontSize: "clamp(2.5rem, 5vw, 4.25rem)",
+                fontSize: "clamp(2.5rem, 4.5vw, 4rem)",
                 fontWeight: 800,
-                lineHeight: 1.08,
+                lineHeight: 1.1,
                 color: "#0f172a",
-                marginBottom: "1.5rem",
+                marginBottom: "1.25rem",
                 letterSpacing: "-0.03em",
-                animation: "heroSlideIn 0.6s ease-out 0.3s both",
+                animation: "heroSlideIn 0.6s ease-out 0.2s both",
               }}>
                 Building Intelligent
                 <br />
@@ -133,12 +129,12 @@ export default function HeroSection() {
 
               {/* Description */}
               <p style={{
-                fontSize: "1.1rem",
+                fontSize: "1.05rem",
                 color: "#64748B",
-                maxWidth: "32rem",
+                maxWidth: "30rem",
                 lineHeight: 1.75,
-                marginBottom: "2rem",
-                animation: "heroSlideIn 0.6s ease-out 0.4s both",
+                marginBottom: "1.75rem",
+                animation: "heroSlideIn 0.6s ease-out 0.3s both",
               }}>
                 We help startups and businesses build scalable, modern
                 and high-performance digital solutions.
@@ -147,17 +143,17 @@ export default function HeroSection() {
               {/* Service tags */}
               <div style={{
                 display: "flex", flexWrap: "wrap", gap: "8px",
-                marginBottom: "2.5rem",
-                animation: "heroSlideIn 0.6s ease-out 0.5s both",
+                marginBottom: "2rem",
+                animation: "heroSlideIn 0.6s ease-out 0.4s both",
               }}>
                 {serviceTags.map(({ icon: Icon, label }) => (
                   <span key={label} style={{
-                    display: "inline-flex", alignItems: "center", gap: "6px",
-                    padding: "7px 14px",
+                    display: "inline-flex", alignItems: "center", gap: "5px",
+                    padding: "6px 12px",
                     background: "#F8FAFC", border: "1px solid #E2E8F0",
-                    borderRadius: "8px", fontSize: "0.82rem", fontWeight: 500, color: "#475569",
+                    borderRadius: "8px", fontSize: "0.8rem", fontWeight: 500, color: "#475569",
                   }}>
-                    <Icon size={13} style={{ color: "#2563EB" }} />
+                    <Icon size={12} style={{ color: "#2563EB" }} />
                     {label}
                   </span>
                 ))}
@@ -166,8 +162,8 @@ export default function HeroSection() {
               {/* CTAs */}
               <div style={{
                 display: "flex", flexWrap: "wrap", gap: "1rem",
-                marginBottom: "3rem",
-                animation: "heroSlideIn 0.6s ease-out 0.6s both",
+                marginBottom: "2.5rem",
+                animation: "heroSlideIn 0.6s ease-out 0.5s both",
               }}>
                 <button
                   onClick={() => scrollTo("#contact")}
@@ -187,28 +183,28 @@ export default function HeroSection() {
 
               {/* Trust badges */}
               <div style={{
-                display: "flex", alignItems: "center", gap: "14px",
-                animation: "heroSlideIn 0.6s ease-out 0.7s both",
+                display: "flex", alignItems: "center", gap: "12px",
+                animation: "heroSlideIn 0.6s ease-out 0.6s both",
               }}>
                 <div style={{ display: "flex" }}>
-                  {avatarColors.map((av, i) => (
+                  {avatarEmojis.map((emoji, i) => (
                     <div key={i} style={{
-                      width: "38px", height: "38px", borderRadius: "50%",
-                      background: av.bg, border: "2.5px solid white",
-                      marginLeft: i === 0 ? 0 : "-10px",
+                      width: "36px", height: "36px", borderRadius: "50%",
+                      background: "#EFF6FF", border: "2px solid white",
+                      marginLeft: i === 0 ? 0 : "-9px",
                       display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: "0.8rem", fontWeight: 600, color: av.text,
-                      boxShadow: "0 2px 4px rgba(0,0,0,0.08)",
-                      zIndex: avatarColors.length - i,
+                      fontSize: "1rem",
+                      boxShadow: "0 2px 4px rgba(0,0,0,0.06)",
+                      zIndex: 4 - i,
                       position: "relative",
                     }}>
-                      {av.letter}
+                      {emoji}
                     </div>
                   ))}
                 </div>
-                <p style={{ fontSize: "0.875rem", color: "#64748B", margin: 0 }}>
+                <p style={{ fontSize: "0.85rem", color: "#64748B", margin: 0 }}>
                   Trusted by{" "}
-                  <span style={{ fontWeight: 600, color: "#2563EB" }}>89+</span>
+                  <span style={{ fontWeight: 700, color: "#2563EB" }}>89+</span>
                   {" "}clients worldwide
                 </p>
               </div>
@@ -217,7 +213,7 @@ export default function HeroSection() {
             {/* Right — 3D Orb */}
             <div className="hero-orb" style={{
               position: "relative",
-              height: "clamp(320px, 45vw, 600px)",
+              height: "clamp(300px, 40vw, 540px)",
               width: "100%",
             }}>
               <OrbErrorBoundary>

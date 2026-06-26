@@ -1,19 +1,17 @@
 import { CheckCircle2, ArrowRight } from "lucide-react";
 
-const values = [
-  "Transparent communication from day one",
-  "Clean, maintainable, scalable code",
-  "Agile delivery with regular milestones",
-  "Post-launch support included",
-  "Security-first development practices",
-  "Performance-optimized by default",
-];
-
-const team = [
-  { name: "Alex Morgan", role: "CEO & Lead Architect", emoji: "👨‍💻", bg: "#EFF6FF", color: "#2563EB" },
-  { name: "Priya Patel", role: "Head of Design", emoji: "🎨", bg: "#FDF2F8", color: "#DB2777" },
-  { name: "Carlos Silva", role: "Full-Stack Lead", emoji: "⚡", bg: "#ECFDF5", color: "#059669" },
-  { name: "Nina Chen", role: "AI/ML Engineer", emoji: "🤖", bg: "#F5F3FF", color: "#8B5CF6" },
+const specializations = [
+  "Website Development",
+  "Web Applications",
+  "Android Applications",
+  "Custom CRM",
+  "Business Dashboards",
+  "AI Agents & AI Automation",
+  "SaaS Platforms",
+  "API Integrations",
+  "UI/UX Design",
+  "Cloud Solutions",
+  "Automation Systems",
 ];
 
 export default function AboutSection() {
@@ -43,25 +41,25 @@ export default function AboutSection() {
                 fontWeight: 800, color: "#0f172a",
                 letterSpacing: "-0.02em", marginBottom: "1.25rem",
               }}>
-                A Team That Builds
+                We Build Digital Products
                 <br />
-                <span className="text-gradient">Like It Is Ours</span>
+                <span className="text-gradient">That Actually Work</span>
               </h2>
               <p style={{ fontSize: "1.05rem", color: "#64748B", lineHeight: 1.8, marginBottom: "1.5rem" }}>
-                MD Studio is a boutique digital agency founded on a simple belief: great software changes lives. 
-                We partner with startups and enterprises to build digital products that are not just functional — 
-                they're extraordinary.
+                MD Studio is a boutique digital agency founded by <strong style={{ color: "#0f172a" }}>Adil Hussain</strong> — 
+                Full Stack Developer and AI Engineer. We build modern digital products for startups and businesses 
+                that want to stand out and grow.
               </p>
               <p style={{ fontSize: "1rem", color: "#64748B", lineHeight: 1.8, marginBottom: "2.5rem" }}>
-                With over 8 years of experience and 127 projects delivered, we bring the precision of a senior 
-                engineering team and the creativity of a design studio to every engagement.
+                From sleek web apps to intelligent AI systems, we bring the precision of a senior engineering team 
+                and the creativity of a design studio to every project.
               </p>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "2rem" }}>
-                {values.map((v) => (
-                  <div key={v} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <CheckCircle2 size={18} style={{ color: "#059669", flexShrink: 0 }} />
-                    <span style={{ fontSize: "0.95rem", color: "#374151" }}>{v}</span>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 20px", marginBottom: "2.5rem" }}>
+                {specializations.map((v) => (
+                  <div key={v} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <CheckCircle2 size={15} style={{ color: "#059669", flexShrink: 0 }} />
+                    <span style={{ fontSize: "0.9rem", color: "#374151" }}>{v}</span>
                   </div>
                 ))}
               </div>
@@ -77,45 +75,49 @@ export default function AboutSection() {
               </button>
             </div>
 
-            {/* Right — Team grid */}
+            {/* Right — Founder card */}
             <div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
-                {team.map((member) => (
-                  <div
-                    key={member.name}
-                    className="glass-card glass-card-hover"
-                    style={{ padding: "1.75rem 1.5rem", textAlign: "center" }}
-                  >
-                    <div style={{
-                      width: "64px", height: "64px", borderRadius: "50%",
-                      background: member.bg,
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: "2rem", margin: "0 auto 1rem",
-                      boxShadow: `0 4px 12px ${member.color}20`,
+              <div className="glass-card" style={{ padding: "2.5rem", textAlign: "center", marginBottom: "1.25rem" }}>
+                <div style={{
+                  width: "90px", height: "90px", borderRadius: "50%",
+                  background: "linear-gradient(135deg, #2563EB 0%, #8B5CF6 100%)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  margin: "0 auto 1.5rem",
+                  fontSize: "2.5rem",
+                  boxShadow: "0 8px 24px rgba(37,99,235,0.3)",
+                }}>
+                  👨‍💻
+                </div>
+                <h3 style={{ fontSize: "1.4rem", fontWeight: 800, color: "#0f172a", marginBottom: "6px" }}>
+                  Adil Hussain
+                </h3>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", justifyContent: "center", marginBottom: "1.5rem" }}>
+                  {["Founder", "Full Stack Developer", "AI Engineer"].map((role) => (
+                    <span key={role} style={{
+                      padding: "4px 12px", borderRadius: "999px",
+                      background: "#EFF6FF", color: "#2563EB",
+                      fontSize: "0.8rem", fontWeight: 600,
                     }}>
-                      {member.emoji}
-                    </div>
-                    <div style={{ fontSize: "0.975rem", fontWeight: 700, color: "#0f172a", marginBottom: "4px" }}>
-                      {member.name}
-                    </div>
-                    <div style={{ fontSize: "0.8rem", color: "#64748B" }}>
-                      {member.role}
-                    </div>
-                  </div>
-                ))}
+                      {role}
+                    </span>
+                  ))}
+                </div>
+                <p style={{ fontSize: "0.9rem", color: "#64748B", lineHeight: 1.7 }}>
+                  Building world-class digital products with a passion for clean code, 
+                  intelligent systems, and exceptional user experiences.
+                </p>
               </div>
 
-              {/* Culture note */}
+              {/* Highlight box */}
               <div style={{
-                marginTop: "1.25rem",
                 background: "linear-gradient(135deg, #EFF6FF 0%, #F5F3FF 100%)",
                 borderRadius: "1rem",
                 padding: "1.5rem",
                 border: "1px solid #DBEAFE",
               }}>
                 <p style={{ fontSize: "0.9rem", color: "#475569", lineHeight: 1.7, margin: 0 }}>
-                  💡 <strong>Fun fact:</strong> Our average project NPS is <strong style={{ color: "#2563EB" }}>94</strong> — 
-                  because we treat every project like it's our own startup.
+                  💡 <strong>Our Commitment:</strong> We treat every project like it's our own startup — 
+                  with full ownership, attention to detail, and a relentless drive for excellence.
                 </p>
               </div>
             </div>

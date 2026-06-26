@@ -1,0 +1,347 @@
+MD Studio – Complete Frontend Refinement & Real Data Integration
+
+You are working on an existing Next.js 15 + TypeScript + Tailwind CSS project.
+
+The backend, Supabase, authentication, middleware, database, admin panel and APIs already exist.
+
+DO NOT break or modify any backend functionality.
+
+Your task is to completely redesign and refine only the frontend while keeping it fully compatible with the existing project.
+
+---
+
+Main Goal
+
+Build a premium world-class digital agency website.
+
+It should feel modern, clean, luxurious, highly animated, responsive and optimized.
+
+It must NOT look like a template.
+
+---
+
+Hero Section
+
+Reduce the hero height significantly.
+
+The Glass Orb should appear immediately beside/below the hero content on mobile instead of very far down.
+
+Reduce unnecessary white space.
+
+Increase the MD Studio logo size by about 40%.
+
+Improve typography.
+
+Improve spacing.
+
+Improve mobile responsiveness.
+
+Keep all animations smooth.
+
+---
+
+Replace Placeholder Content
+
+Remove ALL placeholder/demo content.
+
+Do NOT use fake:
+
+- Team Members
+- Clients
+- Testimonials
+- Blog Articles
+- Email Address
+- Phone Numbers
+- Company Names
+- Locations
+- Projects
+
+If data exists inside Supabase, load it dynamically.
+
+If data is not available yet, create dynamic reusable components that display:
+
+"Coming Soon"
+
+or
+
+"Private Project"
+
+instead of fake information.
+
+---
+
+Real Company Information
+
+Company Name
+
+MD Studio
+
+Founder
+
+Adil Hussain
+
+Role
+
+Founder
+Full Stack Developer
+AI Engineer
+
+---
+
+About
+
+MD Studio builds modern digital products for startups and businesses.
+
+We specialize in:
+
+Website Development
+
+Web Applications
+
+Android Applications
+
+Custom CRM
+
+Business Dashboards
+
+AI Agents
+
+AI Automation
+
+SaaS Platforms
+
+API Integrations
+
+UI/UX
+
+Cloud Solutions
+
+Automation Systems
+
+---
+
+Contact Information
+
+Email
+
+adilhusain3176@gmail.com
+
+Phone
+
++91 9967873413
+
+WhatsApp
+
+https://wa.me/919967873413
+
+---
+
+Social Links
+
+GitHub
+
+https://github.com/tokenanalyzer
+
+Twitter/X
+
+https://x.com/Husain3413
+
+Instagram
+
+https://instagram.com/dil_3413
+
+LinkedIn
+
+Adil Hussain
+
+---
+
+Projects
+
+Create beautiful premium cards for:
+
+SAH ULTIMATE
+
+Post Agent
+
+Prompt Pilot
+
+Nexa AI
+
+Mythos
+
+GhostHub
+
+Data AI
+
+GoBook
+
+CodeBlade
+
+CodeZen
+
+AdilStudio
+
+StockSense
+
+If screenshots are unavailable, use premium placeholders marked:
+
+Private Project
+
+Coming Soon
+
+instead of fake companies.
+
+---
+
+Contact Section
+
+Replace the existing contact area.
+
+Show:
+
+Email
+
+Phone
+
+WhatsApp
+
+GitHub
+
+Instagram
+
+Twitter
+
+LinkedIn
+
+Make every contact method clickable.
+
+---
+
+Floating Buttons
+
+Create premium floating buttons:
+
+WhatsApp
+
+Call
+
+Email
+
+Back To Top
+
+GitHub
+
+---
+
+Navigation
+
+Sticky navbar
+
+Transparent initially
+
+Blur on scroll
+
+Smooth scrolling
+
+Active menu highlight
+
+Mobile drawer animation
+
+---
+
+UI Improvements
+
+Reduce white space across the entire site.
+
+Improve section spacing.
+
+Improve typography.
+
+Improve shadows.
+
+Improve glassmorphism.
+
+Improve gradients.
+
+Improve button hover effects.
+
+Improve card animations.
+
+Improve mobile layout.
+
+Improve tablet layout.
+
+Improve desktop layout.
+
+Keep loading fast.
+
+---
+
+Animations
+
+Framer Motion
+
+GSAP (only if needed)
+
+Smooth fade
+
+Slide
+
+Scale
+
+Hover
+
+Floating Orb
+
+Mouse interaction
+
+Scroll reveal
+
+Everything should feel premium.
+
+---
+
+Performance
+
+Keep Lighthouse score high.
+
+No hydration issues.
+
+No layout shifts.
+
+No console errors.
+
+No TypeScript errors.
+
+---
+
+Backend Rules
+
+DO NOT modify:
+
+Supabase configuration
+
+Authentication
+
+Database
+
+Middleware
+
+Admin functionality
+
+Existing APIs
+
+Only improve frontend.
+
+---
+
+Final Result
+
+The website should look like a premium software company that competes with top agencies.
+
+Continue refining until it no longer feels like a template.
+
+Do not stop after one pass.
+
+Review every section and keep improving the UI, spacing, responsiveness, animations and user experience until the homepage is production-ready.

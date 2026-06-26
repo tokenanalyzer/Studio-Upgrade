@@ -1,0 +1,1 @@
+- [MD Studio WebGL/API gotchas](md-studio-gotchas.md) — WebGL detection + esbuild/zod issues specific to this artifact

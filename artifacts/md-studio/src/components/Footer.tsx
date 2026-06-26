@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { ArrowRight, Twitter, Linkedin, Github, Instagram, ArrowUpRight, CheckCircle, Loader2 } from "lucide-react";
+import { ArrowRight, Twitter, Linkedin, Github, Instagram, CheckCircle, Loader2 } from "lucide-react";
 
 const footerLinks = {
   Company: [
-    { label: "About Us", href: "#about" },
-    { label: "Careers", href: "#" },
+    { label: "About", href: "#about" },
+    { label: "Portfolio", href: "#portfolio" },
     { label: "Case Studies", href: "#case-studies" },
     { label: "Blog", href: "#blog" },
     { label: "Contact", href: "#contact" },
@@ -12,22 +12,24 @@ const footerLinks = {
   Services: [
     { label: "Web Development", href: "#services" },
     { label: "SaaS Platforms", href: "#services" },
+    { label: "AI Agents", href: "#services" },
     { label: "Mobile Apps", href: "#services" },
-    { label: "AI Integration", href: "#services" },
-    { label: "SEO & Growth", href: "#services" },
+    { label: "API Integrations", href: "#services" },
   ],
-  Legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Cookie Policy", href: "#" },
+  Connect: [
+    { label: "GitHub", href: "https://github.com/tokenanalyzer", external: true },
+    { label: "Twitter / X", href: "https://x.com/Husain3413", external: true },
+    { label: "Instagram", href: "https://instagram.com/dil_3413", external: true },
+    { label: "LinkedIn", href: "https://linkedin.com", external: true },
+    { label: "WhatsApp", href: "https://wa.me/919967873413", external: true },
   ],
 };
 
 const socials = [
-  { Icon: Twitter, href: "https://twitter.com", label: "Twitter", color: "#1DA1F2" },
-  { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn", color: "#0A66C2" },
-  { Icon: Github, href: "https://github.com", label: "GitHub", color: "#333" },
-  { Icon: Instagram, href: "https://instagram.com", label: "Instagram", color: "#E1306C" },
+  { Icon: Twitter, href: "https://x.com/Husain3413", label: "Twitter/X" },
+  { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+  { Icon: Github, href: "https://github.com/tokenanalyzer", label: "GitHub" },
+  { Icon: Instagram, href: "https://instagram.com/dil_3413", label: "Instagram" },
 ];
 
 function scrollTo(href: string) {
@@ -58,31 +60,36 @@ export default function Footer() {
         <div className="container-wide">
           <div style={{ display: "grid", gap: "3rem" }} className="footer-grid">
             <style>{`
-              @media (min-width: 768px)  { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr !important; gap: 2rem !important; } }
+              @media (min-width: 768px) {
+                .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr !important; gap: 2rem !important; }
+              }
             `}</style>
 
             {/* Brand column */}
             <div>
               {/* Logo */}
-              <div style={{ display: "flex", alignItems: "baseline", gap: 0, marginBottom: "1.25rem" }}>
-                <span style={{ fontSize: "1.4rem", fontWeight: 800, color: "#60A5FA", letterSpacing: "-0.02em" }}>M</span>
-                <span style={{ fontSize: "1.1rem", fontWeight: 800, color: "#F59E0B", position: "relative", top: "-2px" }}>✦</span>
-                <span style={{ fontSize: "1.4rem", fontWeight: 800, color: "#60A5FA", letterSpacing: "-0.02em" }}>D</span>
-                <span style={{ fontSize: "1.4rem", fontWeight: 800, color: "white", marginLeft: "0.35rem", letterSpacing: "-0.02em" }}>Studio</span>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 0, marginBottom: "1rem" }}>
+                <span style={{ fontSize: "1.5rem", fontWeight: 800, color: "#60A5FA", letterSpacing: "-0.02em" }}>M</span>
+                <span style={{ fontSize: "1.2rem", fontWeight: 800, color: "#F59E0B", position: "relative", top: "-2px" }}>✦</span>
+                <span style={{ fontSize: "1.5rem", fontWeight: 800, color: "#60A5FA", letterSpacing: "-0.02em" }}>D</span>
+                <span style={{ fontSize: "1.5rem", fontWeight: 800, color: "white", marginLeft: "0.35rem", letterSpacing: "-0.02em" }}>Studio</span>
               </div>
+              <p style={{ fontSize: "0.8rem", fontWeight: 500, color: "#94A3B8", marginBottom: "1rem" }}>
+                Founded by <span style={{ color: "#60A5FA", fontWeight: 600 }}>Adil Hussain</span> · Full Stack Developer & AI Engineer
+              </p>
 
-              <p style={{ fontSize: "0.9rem", color: "#94A3B8", lineHeight: 1.75, maxWidth: "22rem", marginBottom: "2rem" }}>
-                A premium digital agency building scalable, high-performance digital products for ambitious startups and businesses worldwide.
+              <p style={{ fontSize: "0.875rem", color: "#64748B", lineHeight: 1.75, maxWidth: "22rem", marginBottom: "2rem" }}>
+                Building modern digital products — from web apps and SaaS platforms to AI agents and automation systems.
               </p>
 
               {/* Newsletter */}
               <div style={{ marginBottom: "2rem" }}>
-                <p style={{ fontSize: "0.85rem", fontWeight: 600, color: "#CBD5E1", marginBottom: "10px" }}>
-                  Subscribe to our newsletter
+                <p style={{ fontSize: "0.82rem", fontWeight: 600, color: "#CBD5E1", marginBottom: "10px" }}>
+                  Stay updated
                 </p>
                 {subscribed ? (
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#4ADE80", fontSize: "0.9rem" }}>
-                    <CheckCircle size={18} /> You're subscribed! Thanks.
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#4ADE80", fontSize: "0.875rem" }}>
+                    <CheckCircle size={16} /> You're subscribed!
                   </div>
                 ) : (
                   <form onSubmit={handleSubscribe} style={{ display: "flex", gap: "8px" }}>
@@ -97,7 +104,7 @@ export default function Footer() {
                         background: "#1E293B",
                         border: "1px solid #334155",
                         color: "white",
-                        fontSize: "0.875rem",
+                        fontSize: "0.85rem",
                         outline: "none",
                         fontFamily: "inherit",
                       }}
@@ -116,15 +123,15 @@ export default function Footer() {
                         transition: "background 0.2s ease",
                       }}
                     >
-                      {loading ? <Loader2 size={16} style={{ animation: "spin 1s linear infinite" }} /> : <ArrowRight size={16} />}
+                      {loading ? <Loader2 size={15} style={{ animation: "spin 1s linear infinite" }} /> : <ArrowRight size={15} />}
                     </button>
-                    <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+                    <style>{`@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }`}</style>
                   </form>
                 )}
               </div>
 
               {/* Socials */}
-              <div style={{ display: "flex", gap: "10px" }}>
+              <div style={{ display: "flex", gap: "8px" }}>
                 {socials.map(({ Icon, href, label }) => (
                   <a
                     key={label}
@@ -133,7 +140,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     title={label}
                     style={{
-                      width: "38px", height: "38px", borderRadius: "10px",
+                      width: "36px", height: "36px", borderRadius: "9px",
                       background: "#1E293B", border: "1px solid #334155",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       color: "#94A3B8", transition: "all 0.2s ease",
@@ -150,7 +157,7 @@ export default function Footer() {
                       (e.currentTarget as HTMLElement).style.color = "#94A3B8";
                     }}
                   >
-                    <Icon size={16} />
+                    <Icon size={15} />
                   </a>
                 ))}
               </div>
@@ -159,27 +166,42 @@ export default function Footer() {
             {/* Link columns */}
             {Object.entries(footerLinks).map(([heading, links]) => (
               <div key={heading}>
-                <h4 style={{ fontSize: "0.85rem", fontWeight: 700, color: "#CBD5E1", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "1.25rem" }}>
+                <h4 style={{ fontSize: "0.78rem", fontWeight: 700, color: "#CBD5E1", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "1.25rem" }}>
                   {heading}
                 </h4>
-                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "9px" }}>
                   {links.map((link) => (
                     <li key={link.label}>
-                      <button
-                        onClick={() => scrollTo(link.href)}
-                        style={{
-                          background: "none", border: "none", padding: 0, cursor: "pointer",
-                          fontSize: "0.9rem", color: "#94A3B8",
-                          display: "flex", alignItems: "center", gap: "4px",
-                          transition: "color 0.2s ease",
-                          fontFamily: "inherit",
-                        }}
-                        onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = "#60A5FA"}
-                        onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = "#94A3B8"}
-                      >
-                        {link.label}
-                        {link.href === "#" && <ArrowUpRight size={12} />}
-                      </button>
+                      {(link as any).external ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            fontSize: "0.875rem", color: "#64748B",
+                            textDecoration: "none", transition: "color 0.2s ease",
+                            display: "block",
+                          }}
+                          onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = "#60A5FA"}
+                          onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = "#64748B"}
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <button
+                          onClick={() => scrollTo(link.href)}
+                          style={{
+                            background: "none", border: "none", padding: 0, cursor: "pointer",
+                            fontSize: "0.875rem", color: "#64748B",
+                            transition: "color 0.2s ease",
+                            fontFamily: "inherit", textAlign: "left",
+                          }}
+                          onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = "#60A5FA"}
+                          onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = "#64748B"}
+                        >
+                          {link.label}
+                        </button>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -199,11 +221,11 @@ export default function Footer() {
             alignItems: "center",
             justifyContent: "space-between",
           }}>
-            <p style={{ fontSize: "0.875rem", color: "#475569" }}>
-              © {new Date().getFullYear()} MD Studio. All rights reserved.
+            <p style={{ fontSize: "0.82rem", color: "#475569" }}>
+              © {new Date().getFullYear()} MD Studio · Adil Hussain. All rights reserved.
             </p>
-            <p style={{ fontSize: "0.875rem", color: "#475569" }}>
-              Crafted with ❤️ for ambitious builders.
+            <p style={{ fontSize: "0.82rem", color: "#475569" }}>
+              Built with passion for ambitious builders 🚀
             </p>
           </div>
         </div>

@@ -1,62 +1,128 @@
 import { useState } from "react";
-import { ArrowUpRight, ExternalLink } from "lucide-react";
+import { Lock, Clock, ArrowUpRight } from "lucide-react";
 
-const categories = ["All", "Web App", "Mobile", "SaaS", "E-Commerce"];
+const categories = ["All", "Web App", "AI / ML", "SaaS", "Mobile", "Tools"];
 
 const projects = [
   {
-    title: "TalentFlow HR Platform",
+    title: "SAH ULTIMATE",
     category: "SaaS",
-    description: "End-to-end HR management platform with AI-powered recruitment, onboarding flows, and payroll integration.",
-    tags: ["React", "Node.js", "PostgreSQL"],
+    description: "A premium all-in-one platform built for power users.",
+    tags: ["SaaS", "React", "TypeScript"],
     color: "#2563EB",
-    gradient: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)",
-    icon: "🏢",
+    gradient: "linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)",
+    status: "private" as const,
+    emoji: "🏆",
   },
   {
-    title: "ShopSense Commerce",
-    category: "E-Commerce",
-    description: "High-performance e-commerce platform serving 50k+ products with real-time inventory and AI recommendations.",
-    tags: ["Next.js", "Stripe", "Algolia"],
-    color: "#059669",
-    gradient: "linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)",
-    icon: "🛍️",
-  },
-  {
-    title: "HealthTrack Mobile",
-    category: "Mobile",
-    description: "Award-winning fitness app with personalized AI coaching, wearable sync, and social challenges.",
-    tags: ["React Native", "ML Kit", "Firebase"],
+    title: "Post Agent",
+    category: "AI / ML",
+    description: "AI-powered social media automation agent that creates and schedules content autonomously.",
+    tags: ["AI Agent", "Automation", "LLM"],
     color: "#8B5CF6",
-    gradient: "linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%)",
-    icon: "💪",
+    gradient: "linear-gradient(135deg, #5B21B6 0%, #8B5CF6 100%)",
+    status: "private" as const,
+    emoji: "🤖",
   },
   {
-    title: "FinSight Analytics",
-    category: "Web App",
-    description: "Real-time financial analytics dashboard with predictive modeling and automated reporting for hedge funds.",
-    tags: ["React", "D3.js", "Python"],
-    color: "#D97706",
-    gradient: "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)",
-    icon: "📈",
-  },
-  {
-    title: "LegalDocs SaaS",
-    category: "SaaS",
-    description: "AI-powered legal document automation platform reducing contract creation time by 80%.",
-    tags: ["GPT-4", "Node.js", "Stripe"],
-    color: "#DB2777",
-    gradient: "linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%)",
-    icon: "⚖️",
-  },
-  {
-    title: "EduLearn Platform",
-    category: "Web App",
-    description: "Interactive e-learning platform with live classrooms, progress tracking, and certification management.",
-    tags: ["React", "WebRTC", "AWS"],
+    title: "Prompt Pilot",
+    category: "AI / ML",
+    description: "Advanced prompt engineering platform for building and testing LLM workflows.",
+    tags: ["Prompt Engineering", "OpenAI", "Node.js"],
     color: "#0EA5E9",
-    gradient: "linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%)",
-    icon: "🎓",
+    gradient: "linear-gradient(135deg, #0369A1 0%, #38BDF8 100%)",
+    status: "private" as const,
+    emoji: "🧠",
+  },
+  {
+    title: "Nexa AI",
+    category: "AI / ML",
+    description: "Intelligent AI assistant platform with custom knowledge base and multi-agent orchestration.",
+    tags: ["LLM", "RAG", "Python"],
+    color: "#059669",
+    gradient: "linear-gradient(135deg, #065F46 0%, #059669 100%)",
+    status: "private" as const,
+    emoji: "⚡",
+  },
+  {
+    title: "Mythos",
+    category: "Web App",
+    description: "Immersive storytelling platform with AI-generated narrative worlds.",
+    tags: ["Next.js", "AI", "Creative"],
+    color: "#DB2777",
+    gradient: "linear-gradient(135deg, #9D174D 0%, #EC4899 100%)",
+    status: "private" as const,
+    emoji: "📖",
+  },
+  {
+    title: "GhostHub",
+    category: "Tools",
+    description: "Developer productivity hub with automated code review and deployment pipelines.",
+    tags: ["DevOps", "CI/CD", "TypeScript"],
+    color: "#475569",
+    gradient: "linear-gradient(135deg, #1E293B 0%, #475569 100%)",
+    status: "private" as const,
+    emoji: "👻",
+  },
+  {
+    title: "Data AI",
+    category: "AI / ML",
+    description: "Natural language interface for querying databases and generating business intelligence reports.",
+    tags: ["NLP", "PostgreSQL", "Analytics"],
+    color: "#D97706",
+    gradient: "linear-gradient(135deg, #92400E 0%, #F59E0B 100%)",
+    status: "private" as const,
+    emoji: "📊",
+  },
+  {
+    title: "GoBook",
+    category: "SaaS",
+    description: "Smart booking and scheduling SaaS for service-based businesses.",
+    tags: ["SaaS", "Stripe", "React"],
+    color: "#2563EB",
+    gradient: "linear-gradient(135deg, #1E40AF 0%, #60A5FA 100%)",
+    status: "coming-soon" as const,
+    emoji: "📅",
+  },
+  {
+    title: "CodeBlade",
+    category: "Tools",
+    description: "Next-generation code editor with inline AI suggestions and pair-programming mode.",
+    tags: ["IDE", "AI", "WebAssembly"],
+    color: "#7C3AED",
+    gradient: "linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)",
+    status: "coming-soon" as const,
+    emoji: "⚔️",
+  },
+  {
+    title: "CodeZen",
+    category: "Tools",
+    description: "Code quality and refactoring assistant that enforces best practices automatically.",
+    tags: ["Code Quality", "AST", "TypeScript"],
+    color: "#059669",
+    gradient: "linear-gradient(135deg, #064E3B 0%, #34D399 100%)",
+    status: "private" as const,
+    emoji: "🧘",
+  },
+  {
+    title: "AdilStudio",
+    category: "Web App",
+    description: "Personal portfolio and client project showcase platform.",
+    tags: ["Portfolio", "Next.js", "Framer"],
+    color: "#0f172a",
+    gradient: "linear-gradient(135deg, #0f172a 0%, #334155 100%)",
+    status: "coming-soon" as const,
+    emoji: "🎨",
+  },
+  {
+    title: "StockSense",
+    category: "SaaS",
+    description: "Real-time stock market intelligence with AI-driven pattern recognition and alerts.",
+    tags: ["FinTech", "AI", "Real-time"],
+    color: "#B45309",
+    gradient: "linear-gradient(135deg, #78350F 0%, #F59E0B 100%)",
+    status: "private" as const,
+    emoji: "📈",
   },
 ];
 
@@ -88,14 +154,14 @@ export default function PortfolioSection() {
               fontWeight: 800, color: "#0f172a",
               letterSpacing: "-0.02em", marginBottom: "1rem",
             }}>
-              Projects That{" "}
-              <span className="text-gradient-violet">Define Excellence</span>
+              Projects We Have{" "}
+              <span className="text-gradient-violet">Built & Shipped</span>
             </h2>
             <p style={{
               fontSize: "1.05rem", color: "#64748B",
-              maxWidth: "32rem", margin: "0 auto", lineHeight: 1.75,
+              maxWidth: "36rem", margin: "0 auto", lineHeight: 1.75,
             }}>
-              Explore a selection of our most impactful digital products across industries.
+              A selection of our digital products. Some are live, some are private — all are built with the same obsession for quality.
             </p>
           </div>
 
@@ -127,14 +193,13 @@ export default function PortfolioSection() {
           </div>
 
           {/* Grid */}
-          <div style={{ display: "grid", gap: "1.5rem" }} className="portfolio-grid">
+          <div style={{ display: "grid", gap: "1.25rem" }} className="portfolio-grid">
             <style>{`
               @media (min-width: 640px)  { .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; } }
               @media (min-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(3, 1fr) !important; } }
-              .portfolio-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(0,0,0,0.1); }
-              .portfolio-card { transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1); }
-              .portfolio-card:hover .portfolio-link { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-              .portfolio-link { opacity: 0; transform: translate(-50%, -50%) scale(0.8); transition: all 0.25s ease; }
+              @media (min-width: 1280px) { .portfolio-grid { grid-template-columns: repeat(4, 1fr) !important; } }
+              .portfolio-card { transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1); cursor:pointer; }
+              .portfolio-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
             `}</style>
 
             {filtered.map((project) => (
@@ -150,53 +215,67 @@ export default function PortfolioSection() {
               >
                 {/* Visual preview */}
                 <div style={{
-                  height: "200px",
+                  height: "160px",
                   background: project.gradient,
                   position: "relative",
                   display: "flex", alignItems: "center", justifyContent: "center",
                 }}>
-                  <span style={{ fontSize: "4rem" }}>{project.icon}</span>
+                  <span style={{ fontSize: "3.5rem", filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.3))" }}>
+                    {project.emoji}
+                  </span>
+
+                  {/* Status badge */}
+                  {project.status === "private" && (
+                    <div style={{
+                      position: "absolute", top: "10px", right: "10px",
+                      display: "flex", alignItems: "center", gap: "5px",
+                      padding: "4px 10px", borderRadius: "999px",
+                      background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)",
+                      color: "rgba(255,255,255,0.9)", fontSize: "0.72rem", fontWeight: 600,
+                    }}>
+                      <Lock size={10} /> Private Project
+                    </div>
+                  )}
+                  {project.status === "coming-soon" && (
+                    <div style={{
+                      position: "absolute", top: "10px", right: "10px",
+                      display: "flex", alignItems: "center", gap: "5px",
+                      padding: "4px 10px", borderRadius: "999px",
+                      background: "rgba(245,158,11,0.9)", backdropFilter: "blur(8px)",
+                      color: "white", fontSize: "0.72rem", fontWeight: 600,
+                    }}>
+                      <Clock size={10} /> Coming Soon
+                    </div>
+                  )}
+
+                  {/* Category */}
                   <div style={{
-                    position: "absolute", top: "12px", right: "12px",
-                    padding: "5px 12px", borderRadius: "999px",
-                    background: "white", fontSize: "0.75rem",
-                    fontWeight: 600, color: project.color,
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+                    position: "absolute", bottom: "10px", left: "10px",
+                    padding: "3px 10px", borderRadius: "999px",
+                    background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)",
+                    fontSize: "0.72rem", fontWeight: 600, color: "rgba(255,255,255,0.9)",
                   }}>
                     {project.category}
                   </div>
-                  <button
-                    className="portfolio-link"
-                    style={{
-                      position: "absolute", left: "50%", top: "50%",
-                      background: project.color, color: "white",
-                      border: "none", borderRadius: "999px",
-                      padding: "10px 20px",
-                      display: "flex", alignItems: "center", gap: "6px",
-                      fontSize: "0.875rem", fontWeight: 500, cursor: "pointer",
-                    }}
-                  >
-                    <ExternalLink size={14} /> View Project
-                  </button>
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: "1.5rem" }}>
-                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "0.75rem" }}>
-                    <h3 style={{ fontSize: "1.05rem", fontWeight: 700, color: "#0f172a" }}>
+                <div style={{ padding: "1.25rem" }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "6px" }}>
+                    <h3 style={{ fontSize: "0.975rem", fontWeight: 700, color: "#0f172a" }}>
                       {project.title}
                     </h3>
-                    <ArrowUpRight size={17} style={{ color: "#94A3B8", flexShrink: 0, marginLeft: "8px" }} />
+                    <ArrowUpRight size={15} style={{ color: "#94A3B8", flexShrink: 0, marginLeft: "6px", marginTop: "2px" }} />
                   </div>
-                  <p style={{ fontSize: "0.875rem", color: "#64748B", lineHeight: 1.65, marginBottom: "1rem" }}>
+                  <p style={{ fontSize: "0.82rem", color: "#64748B", lineHeight: 1.6, marginBottom: "1rem" }}>
                     {project.description}
                   </p>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
                     {project.tags.map((tag) => (
                       <span key={tag} style={{
-                        padding: "3px 10px", borderRadius: "6px",
+                        padding: "3px 8px", borderRadius: "6px",
                         background: "#F1F5F9", color: "#475569",
-                        fontSize: "0.78rem", fontWeight: 500,
+                        fontSize: "0.72rem", fontWeight: 500,
                       }}>
                         {tag}
                       </span>
@@ -214,7 +293,7 @@ export default function PortfolioSection() {
                 const el = document.querySelector("#contact");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className="btn-secondary"
+              className="btn-primary"
               style={{ display: "inline-flex" }}
             >
               Start Your Project <ArrowUpRight size={16} />
