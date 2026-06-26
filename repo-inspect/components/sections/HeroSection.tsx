@@ -1,0 +1,151 @@
+"use client";
+
+import { Suspense, lazy } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
+import Link from "next/link";
+
+
+export default function HeroSection() {
+  return (
+    <section className="relative min-h-screen bg-white overflow-hidden pt-20 lg:pt-0">
+      {/* Background glow effects */}
+      <div className="absolute top-20 right-[5%] w-[600px] h-[600px] bg-accent-50/60 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-20 left-[10%] w-[400px] h-[400px] bg-sky-50/40 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-40 left-[30%] w-[200px] h-[200px] bg-violet-50/30 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-accent-200 rounded-full"
+            style={{
+              left: `${15 + i * 15}%`,
+              top: `${20 + (i % 3) * 25}%`,
+              animation: `particle-float ${6 + i}s ease-in-out infinite`,
+              animationDelay: `${i * 0.8}s`,
+              opacity: 0.3,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="section-padding relative z-10">
+        <div className="container-wide">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 min-h-screen items-center">
+            {/* Left Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="pt-8 lg:pt-0"
+            >
+              {/* Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-accent-50 border border-accent-100 rounded-full mb-8"
+              >
+                <Sparkles className="w-4 h-4 text-accent-600" />
+                <span className="text-sm font-medium text-accent-600">
+                  Digital Solutions That Drive Growth
+                </span>
+              </motion.div>
+
+              {/* Headline */}
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-900 leading-[1.1] mb-6"
+              >
+                Building Intelligent
+                <br />
+                <span className="text-gradient">Digital Products</span>
+              </motion.h1>
+
+              {/* Description */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="text-lg text-slate-500 max-w-lg mb-8 leading-relaxed"
+              >
+                We help startups and businesses build scalable, modern
+                and high-performance digital solutions.
+              </motion.p>
+
+              {/* Service Tags */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="flex flex-wrap gap-2 mb-10"
+              >
+                {["Web Development", "SaaS Platforms", "UI/UX Design", "AI Integration"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium text-slate-600"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </motion.div>
+
+              {/* CTAs */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+                className="flex flex-wrap gap-4 mb-12"
+              >
+                <Link href="/contact" className="btn-primary">
+                  Start a Project
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link href="/portfolio" className="btn-secondary">
+                  View Portfolio
+                  <ArrowUpRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
+
+              {/* Trust Badges */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+                className="flex items-center gap-4"
+              >
+                <div className="flex -space-x-3">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div
+                      key={i}
+                      className="w-10 h-10 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center text-xs font-medium text-slate-500"
+                    >
+                      {String.fromCharCode(64 + i)}
+                    </div>
+                  ))}
+                </div>
+                <p className="text-sm text-slate-500">
+                  Trusted by <span className="font-semibold text-accent-600">89+</span> clients worldwide
+                </p>
+              </motion.div>
+            </motion.div>
+
+            {/* Right - 3D Orb */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="relative h-[400px] lg:h-[600px] w-full"
+            >
+              <div className="w-full h-[400px] bg-gray-100 rounded-3xl" />
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
