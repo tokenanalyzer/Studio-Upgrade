@@ -2,7 +2,7 @@ import { Star, Clock, MessageSquare } from "lucide-react";
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" style={{ padding: "6rem 0", background: "white" }}>
+    <section id="testimonials" className="section-block" style={{ background: "white" }}>
       <div className="section-padding">
         <div className="container-wide">
           {/* Header */}

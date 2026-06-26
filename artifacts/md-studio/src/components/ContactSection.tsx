@@ -97,7 +97,7 @@ export default function ContactSection() {
   });
 
   return (
-    <section id="contact" style={{ padding: "6rem 0", background: "white" }}>
+    <section id="contact" className="section-block" style={{ background: "white" }}>
       <div className="section-padding">
         <div className="container-wide">
           {/* Header */}

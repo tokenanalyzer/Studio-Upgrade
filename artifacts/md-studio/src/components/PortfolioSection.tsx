@@ -134,7 +134,7 @@ export default function PortfolioSection() {
     : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="portfolio" style={{ padding: "6rem 0", background: "white" }}>
+    <section id="portfolio" className="section-block" style={{ background: "white" }}>
       <div className="section-padding">
         <div className="container-wide">
           {/* Header */}

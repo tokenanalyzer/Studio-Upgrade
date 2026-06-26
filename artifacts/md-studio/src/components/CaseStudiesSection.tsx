@@ -2,70 +2,64 @@ import { Clock, ArrowRight, FileSearch } from "lucide-react";
 
 export default function CaseStudiesSection() {
   return (
-    <section id="case-studies" style={{ padding: "6rem 0", background: "#F8FAFC" }}>
+    <section id="case-studies" className="section-block" style={{ background: "#F8FAFC" }}>
       <div className="section-padding">
         <div className="container-wide">
-          {/* Header */}
-          <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+          <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
             <div style={{
               display: "inline-flex", alignItems: "center", gap: "8px",
-              padding: "6px 16px", borderRadius: "999px",
+              padding: "5px 14px", borderRadius: "999px",
               background: "#ECFDF5", border: "1px solid #A7F3D0",
-              marginBottom: "1rem",
+              marginBottom: "0.75rem",
             }}>
-              <span style={{ fontSize: "0.82rem", fontWeight: 600, color: "#059669", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+              <span style={{ fontSize: "0.8rem", fontWeight: 600, color: "#059669", letterSpacing: "0.05em", textTransform: "uppercase" }}>
                 Case Studies
               </span>
             </div>
             <h2 style={{
-              fontSize: "clamp(2rem, 3.5vw, 3rem)",
+              fontSize: "clamp(2rem, 3vw, 3.2rem)",
               fontWeight: 800, color: "#0f172a",
-              letterSpacing: "-0.02em", marginBottom: "1rem",
+              letterSpacing: "-0.025em", marginBottom: "0.75rem", lineHeight: 1.15,
             }}>
               Deep Dives Into{" "}
               <span className="text-gradient">Real Projects</span>
             </h2>
             <p style={{
-              fontSize: "1.05rem", color: "#64748B",
-              maxWidth: "32rem", margin: "0 auto", lineHeight: 1.75,
+              fontSize: "1rem", color: "#64748B",
+              maxWidth: "30rem", margin: "0 auto", lineHeight: 1.72,
             }}>
-              Detailed write-ups on the challenges we solved, the decisions we made, and the outcomes we delivered.
+              Detailed write-ups on the challenges, decisions, and outcomes of our most impactful projects.
             </p>
           </div>
 
-          {/* Coming soon state */}
           <div style={{
             background: "white",
-            borderRadius: "1.5rem",
-            padding: "5rem 2rem",
+            borderRadius: "1.25rem",
+            padding: "4rem 2rem",
             border: "1px solid #E2E8F0",
             textAlign: "center",
           }}>
             <div style={{
-              width: "72px", height: "72px", borderRadius: "50%",
+              width: "64px", height: "64px", borderRadius: "50%",
               background: "linear-gradient(135deg, #ECFDF5, #D1FAE5)",
               display: "flex", alignItems: "center", justifyContent: "center",
-              margin: "0 auto 1.5rem",
+              margin: "0 auto 1.25rem",
               border: "2px solid #A7F3D0",
             }}>
-              <FileSearch size={30} style={{ color: "#059669" }} />
+              <FileSearch size={28} style={{ color: "#059669" }} />
             </div>
-
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: "center", marginBottom: "1rem" }}>
-              <Clock size={18} style={{ color: "#94A3B8" }} />
-              <span style={{ fontSize: "1rem", fontWeight: 600, color: "#64748B" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: "center", marginBottom: "0.75rem" }}>
+              <Clock size={16} style={{ color: "#94A3B8" }} />
+              <span style={{ fontSize: "0.95rem", fontWeight: 600, color: "#64748B" }}>
                 Case studies being prepared
               </span>
             </div>
-
             <p style={{
-              fontSize: "0.95rem", color: "#94A3B8", maxWidth: "28rem",
-              margin: "0 auto 2rem", lineHeight: 1.7,
+              fontSize: "0.9rem", color: "#94A3B8", maxWidth: "26rem",
+              margin: "0 auto 1.75rem", lineHeight: 1.7,
             }}>
-              We're documenting the stories behind our projects — the real challenges, design decisions, 
-              and measurable results. Coming soon.
+              We're documenting the real stories behind our projects — challenges, design decisions, and measurable results.
             </p>
-
             <button
               onClick={() => {
                 const el = document.querySelector("#contact");

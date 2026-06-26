@@ -2,7 +2,7 @@ import { Clock, ArrowUpRight, Rss } from "lucide-react";
 
 export default function BlogPreview() {
   return (
-    <section id="blog" style={{ padding: "6rem 0", background: "#F8FAFC" }}>
+    <section id="blog" className="section-block" style={{ background: "#F8FAFC" }}>
       <div className="section-padding">
         <div className="container-wide">
           {/* Header */}

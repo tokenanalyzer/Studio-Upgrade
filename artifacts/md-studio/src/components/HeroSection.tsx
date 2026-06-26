@@ -25,102 +25,120 @@ export default function HeroSection() {
       id="home"
       style={{
         position: "relative",
-        minHeight: "100vh",
+        height: "100dvh",
+        minHeight: "700px",
         background: "white",
         overflow: "hidden",
-        paddingTop: "72px",
-        display: "flex",
-        alignItems: "center",
+        paddingTop: "68px",
       }}
     >
       {/* Background glow blobs */}
       <div style={{
-        position: "absolute", top: "5%", right: "0%",
-        width: "550px", height: "550px",
-        background: "radial-gradient(circle, rgba(219,234,254,0.55) 0%, transparent 70%)",
-        borderRadius: "50%", filter: "blur(50px)", pointerEvents: "none",
+        position: "absolute", top: 0, right: "0",
+        width: "55%", height: "100%",
+        background: "radial-gradient(ellipse at 80% 40%, rgba(219,234,254,0.55) 0%, rgba(237,233,254,0.2) 50%, transparent 70%)",
+        pointerEvents: "none",
       }} />
       <div style={{
-        position: "absolute", bottom: "10%", left: "5%",
-        width: "350px", height: "350px",
-        background: "radial-gradient(circle, rgba(224,242,254,0.4) 0%, transparent 70%)",
-        borderRadius: "50%", filter: "blur(40px)", pointerEvents: "none",
-      }} />
-      <div style={{
-        position: "absolute", top: "40%", left: "40%",
-        width: "200px", height: "200px",
-        background: "radial-gradient(circle, rgba(237,233,254,0.3) 0%, transparent 70%)",
-        borderRadius: "50%", filter: "blur(30px)", pointerEvents: "none",
+        position: "absolute", bottom: "0", left: "0",
+        width: "35%", height: "60%",
+        background: "radial-gradient(ellipse at 20% 80%, rgba(224,242,254,0.35) 0%, transparent 65%)",
+        pointerEvents: "none",
       }} />
 
       {/* Floating particles */}
-      {[0,1,2,3,4].map((i) => (
+      {[0,1,2,3,4,5].map((i) => (
         <div key={i} style={{
           position: "absolute",
-          width: i % 2 === 0 ? "7px" : "5px",
-          height: i % 2 === 0 ? "7px" : "5px",
+          width: i % 2 === 0 ? "8px" : "5px",
+          height: i % 2 === 0 ? "8px" : "5px",
           background: i % 3 === 0 ? "#BFDBFE" : "#DDD6FE",
           borderRadius: "50%",
-          left: `${10 + i * 17}%`,
-          top: `${25 + (i % 3) * 20}%`,
-          animation: `particle-float ${5 + i * 0.8}s ease-in-out infinite`,
-          animationDelay: `${i * 0.6}s`,
-          opacity: 0.4,
+          left: `${8 + i * 15}%`,
+          top: `${20 + (i % 3) * 22}%`,
+          animation: `particle-float ${5 + i * 0.7}s ease-in-out infinite`,
+          animationDelay: `${i * 0.5}s`,
+          opacity: 0.45,
           pointerEvents: "none",
         }} />
       ))}
 
-      <div className="section-padding" style={{ position: "relative", zIndex: 10, width: "100%", paddingTop: "2rem", paddingBottom: "2rem" }}>
-        <div className="container-wide">
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: "2rem",
-            alignItems: "center",
-          }}
-            className="hero-grid"
-          >
+      <div
+        className="section-padding"
+        style={{ position: "relative", zIndex: 10, width: "100%", height: "100%", display: "flex", alignItems: "center" }}
+      >
+        <div className="container-wide" style={{ width: "100%" }}>
+          <div className="hero-grid">
             <style>{`
+              .hero-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                align-items: center;
+                padding: 2rem 0;
+              }
+              @media (min-width: 768px) {
+                .hero-grid {
+                  grid-template-columns: 1fr 1fr;
+                  gap: 1rem;
+                  padding: 2rem 0;
+                  align-items: center;
+                }
+              }
               @media (min-width: 1024px) {
-                .hero-grid { grid-template-columns: 55fr 45fr !important; gap: 1rem !important; }
+                .hero-grid {
+                  grid-template-columns: 52fr 48fr;
+                  gap: 0;
+                  padding: 0;
+                  align-items: flex-start;
+                  min-height: calc(100dvh - 68px);
+                }
+                .hero-text { padding-top: 8vh; }
+                .hero-orb-col {
+                  height: calc(100dvh - 68px) !important;
+                  max-height: none !important;
+                }
               }
-              .hero-text { animation: heroSlideIn 0.7s ease-out both; }
+              @media (min-width: 1280px) {
+                .hero-grid {
+                  grid-template-columns: 50fr 50fr;
+                }
+              }
+              .hero-text { animation: heroSlideIn 0.65s ease-out both; }
+              .hero-orb-col { animation: heroFadeScale 0.75s ease-out 0.2s both; }
               @keyframes heroSlideIn {
-                from { opacity: 0; transform: translateX(-30px); }
-                to { opacity: 1; transform: translateX(0); }
+                from { opacity: 0; transform: translateX(-28px); }
+                to   { opacity: 1; transform: translateX(0); }
               }
-              .hero-orb { animation: heroFadeScale 0.8s ease-out 0.25s both; }
               @keyframes heroFadeScale {
-                from { opacity: 0; transform: scale(0.9); }
-                to { opacity: 1; transform: scale(1); }
+                from { opacity: 0; transform: scale(0.92); }
+                to   { opacity: 1; transform: scale(1); }
               }
             `}</style>
 
-            {/* Left — Content */}
+            {/* ── LEFT COLUMN ── */}
             <div className="hero-text">
               {/* Badge */}
               <div style={{
-                display: "inline-flex", alignItems: "center", gap: "8px",
-                padding: "7px 16px", borderRadius: "999px",
+                display: "inline-flex", alignItems: "center", gap: "7px",
+                padding: "6px 14px", borderRadius: "999px",
                 background: "#EFF6FF", border: "1px solid #BFDBFE",
-                marginBottom: "1.5rem",
-                animation: "heroSlideIn 0.5s ease-out 0.1s both",
+                marginBottom: "1.25rem",
               }}>
-                <Sparkles size={13} style={{ color: "#2563EB" }} />
-                <span style={{ fontSize: "0.82rem", fontWeight: 600, color: "#2563EB" }}>
+                <Sparkles size={12} style={{ color: "#2563EB" }} />
+                <span style={{ fontSize: "0.8rem", fontWeight: 600, color: "#2563EB" }}>
                   Digital Solutions That Drive Growth
                 </span>
               </div>
 
               {/* Headline */}
               <h1 style={{
-                fontSize: "clamp(2.5rem, 4.5vw, 4rem)",
+                fontSize: "clamp(2.6rem, 5.5vw, 6rem)",
                 fontWeight: 800,
-                lineHeight: 1.1,
+                lineHeight: 1.08,
                 color: "#0f172a",
-                marginBottom: "1.25rem",
-                letterSpacing: "-0.03em",
-                animation: "heroSlideIn 0.6s ease-out 0.2s both",
+                marginBottom: "1rem",
+                letterSpacing: "-0.035em",
               }}>
                 Building Intelligent
                 <br />
@@ -129,22 +147,21 @@ export default function HeroSection() {
 
               {/* Description */}
               <p style={{
-                fontSize: "1.05rem",
+                fontSize: "clamp(0.95rem, 1.2vw, 1.1rem)",
                 color: "#64748B",
-                maxWidth: "30rem",
-                lineHeight: 1.75,
-                marginBottom: "1.75rem",
-                animation: "heroSlideIn 0.6s ease-out 0.3s both",
+                maxWidth: "32rem",
+                lineHeight: 1.72,
+                marginBottom: "1.5rem",
               }}>
                 We help startups and businesses build scalable, modern
-                and high-performance digital solutions.
+                and high-performance digital solutions that create
+                real impact.
               </p>
 
               {/* Service tags */}
               <div style={{
-                display: "flex", flexWrap: "wrap", gap: "8px",
-                marginBottom: "2rem",
-                animation: "heroSlideIn 0.6s ease-out 0.4s both",
+                display: "flex", flexWrap: "wrap", gap: "7px",
+                marginBottom: "1.75rem",
               }}>
                 {serviceTags.map(({ icon: Icon, label }) => (
                   <span key={label} style={{
@@ -161,31 +178,21 @@ export default function HeroSection() {
 
               {/* CTAs */}
               <div style={{
-                display: "flex", flexWrap: "wrap", gap: "1rem",
-                marginBottom: "2.5rem",
-                animation: "heroSlideIn 0.6s ease-out 0.5s both",
+                display: "flex", flexWrap: "wrap", gap: "0.85rem",
+                marginBottom: "2rem",
               }}>
-                <button
-                  onClick={() => scrollTo("#contact")}
-                  className="btn-primary"
-                >
+                <button onClick={() => scrollTo("#contact")} className="btn-primary">
                   Start a Project
                   <ArrowRight size={16} />
                 </button>
-                <button
-                  onClick={() => scrollTo("#portfolio")}
-                  className="btn-secondary"
-                >
-                  View Portfolio
+                <button onClick={() => scrollTo("#portfolio")} className="btn-secondary">
+                  View Our Work
                   <ArrowUpRight size={16} />
                 </button>
               </div>
 
               {/* Trust badges */}
-              <div style={{
-                display: "flex", alignItems: "center", gap: "12px",
-                animation: "heroSlideIn 0.6s ease-out 0.6s both",
-              }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                 <div style={{ display: "flex" }}>
                   {avatarEmojis.map((emoji, i) => (
                     <div key={i} style={{
@@ -194,7 +201,7 @@ export default function HeroSection() {
                       marginLeft: i === 0 ? 0 : "-9px",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       fontSize: "1rem",
-                      boxShadow: "0 2px 4px rgba(0,0,0,0.06)",
+                      boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
                       zIndex: 4 - i,
                       position: "relative",
                     }}>
@@ -203,19 +210,23 @@ export default function HeroSection() {
                   ))}
                 </div>
                 <p style={{ fontSize: "0.85rem", color: "#64748B", margin: 0 }}>
-                  Trusted by{" "}
-                  <span style={{ fontWeight: 700, color: "#2563EB" }}>89+</span>
-                  {" "}clients worldwide
+                  Trusted by <span style={{ fontWeight: 700, color: "#2563EB" }}>89+</span> clients worldwide
                 </p>
               </div>
             </div>
 
-            {/* Right — 3D Orb */}
-            <div className="hero-orb" style={{
-              position: "relative",
-              height: "clamp(300px, 40vw, 540px)",
-              width: "100%",
-            }}>
+            {/* ── RIGHT COLUMN — Orb ── */}
+            <div
+              className="hero-orb-col"
+              style={{
+                position: "relative",
+                width: "100%",
+                height: "clamp(300px, 55vw, 680px)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <OrbErrorBoundary>
                 <Suspense fallback={<FallbackOrb />}>
                   <GlassOrb />
