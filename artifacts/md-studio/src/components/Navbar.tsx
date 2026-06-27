@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
+const NAV_H = 80;
+
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "#about" },
@@ -12,30 +14,25 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-function Logo({ size = "default" }: { size?: "default" | "mobile" }) {
-  const fs = size === "mobile" ? "1.5rem" : "1.95rem";
-  const starFs = size === "mobile" ? "1rem" : "1.3rem";
-
+function Logo() {
   return (
     <a
       href="/"
       style={{
         position: "relative",
         display: "inline-flex",
-        alignItems: "baseline",
+        alignItems: "center",
         textDecoration: "none",
         gap: 0,
         lineHeight: 1,
+        overflow: "visible",
       }}
     >
-      {/* MD group */}
-      <span style={{ fontSize: fs, fontWeight: 800, color: "#2563EB", letterSpacing: "-0.025em" }}>
+      <span style={{ fontSize: "1.7rem", fontWeight: 800, color: "#2563EB", letterSpacing: "-0.025em" }}>
         MD
       </span>
-
-      {/* Star separator */}
       <span style={{
-        fontSize: starFs,
+        fontSize: "1.15rem",
         fontWeight: 800,
         color: "#F59E0B",
         margin: "0 5px",
@@ -46,13 +43,9 @@ function Logo({ size = "default" }: { size?: "default" | "mobile" }) {
       }}>
         ✦
       </span>
-
-      {/* Studio group — last char "o" gets glow pulse */}
-      <span style={{ fontSize: fs, fontWeight: 800, color: "#0f172a", letterSpacing: "-0.025em" }}>
+      <span style={{ fontSize: "1.7rem", fontWeight: 800, color: "#0f172a", letterSpacing: "-0.025em" }}>
         Studi<span className="logo-o-animated">o</span>
       </span>
-
-      {/* Animated ball traveling from M to O */}
       <div className="logo-ball-animated" />
     </a>
   );
@@ -92,17 +85,23 @@ export default function Navbar() {
           from { opacity: 0; transform: translateY(-10px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        .nav-desktop { display: none !important; }
+        .nav-mobile-toggle { display: flex !important; }
+        @media (min-width: 1024px) {
+          .nav-desktop { display: flex !important; }
+          .nav-mobile-toggle { display: none !important; }
+        }
       `}</style>
 
       <header
         style={{
           position: "fixed",
           top: 0, left: 0, right: 0,
-          zIndex: 50,
+          zIndex: 100,
           animation: "slideDown 0.55s ease-out",
           transition: "all 0.4s ease",
           ...(isScrolled ? {
-            background: "rgba(255,255,255,0.88)",
+            background: "rgba(255,255,255,0.92)",
             backdropFilter: "blur(24px)",
             WebkitBackdropFilter: "blur(24px)",
             borderBottom: "1px solid rgba(226,232,240,0.7)",
@@ -118,19 +117,16 @@ export default function Navbar() {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              height: "68px",
+              height: `${NAV_H}px`,
             }}>
-              {/* Logo */}
+              {/* Logo — only here, nowhere else */}
               <Logo />
 
               {/* Desktop Nav */}
-              <div style={{ display: "none", alignItems: "center", gap: "2px" }} className="nav-desktop">
-                <style>{`
-                  @media (min-width: 1024px) {
-                    .nav-desktop { display: flex !important; }
-                    .nav-mobile-toggle { display: none !important; }
-                  }
-                `}</style>
+              <div
+                style={{ alignItems: "center", gap: "2px" }}
+                className="nav-desktop"
+              >
                 {navLinks.map((link) => (
                   <button
                     key={link.href}
@@ -163,7 +159,10 @@ export default function Navbar() {
               </div>
 
               {/* Desktop CTA */}
-              <div style={{ display: "none", alignItems: "center", gap: "12px" }} className="nav-desktop">
+              <div
+                style={{ alignItems: "center", gap: "12px" }}
+                className="nav-desktop"
+              >
                 <button
                   onClick={() => handleNavClick("#contact")}
                   className="btn-primary"
@@ -174,36 +173,40 @@ export default function Navbar() {
                 </button>
               </div>
 
-              {/* Mobile Toggle */}
+              {/* Mobile hamburger */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="nav-mobile-toggle"
+                aria-label="Toggle menu"
                 style={{
-                  display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  width: "40px", height: "40px",
-                  background: "none", border: "none",
-                  cursor: "pointer", borderRadius: "10px",
+                  width: "44px",
+                  height: "44px",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  borderRadius: "10px",
+                  flexShrink: 0,
                 }}
-                aria-label="Toggle menu"
               >
                 {isMobileMenuOpen
-                  ? <X size={20} style={{ color: "#334155" }} />
-                  : <Menu size={20} style={{ color: "#334155" }} />}
+                  ? <X size={22} style={{ color: "#334155" }} />
+                  : <Menu size={22} style={{ color: "#334155" }} />}
               </button>
             </nav>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile slide-down menu */}
       {isMobileMenuOpen && (
         <div
           style={{
             position: "fixed",
-            left: 0, right: 0, top: "68px",
-            zIndex: 40,
+            left: 0, right: 0,
+            top: `${NAV_H}px`,
+            zIndex: 90,
             background: "rgba(255,255,255,0.97)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
@@ -220,9 +223,9 @@ export default function Navbar() {
                   onClick={() => handleNavClick(link.href)}
                   style={{
                     textAlign: "left",
-                    padding: "11px 14px",
+                    padding: "12px 14px",
                     borderRadius: "10px",
-                    fontSize: "0.9rem",
+                    fontSize: "0.95rem",
                     fontWeight: 500,
                     color: "#475569",
                     background: "none",
