@@ -1,191 +1,220 @@
-import { useState } from "react";
-import { Lock, Clock, ArrowUpRight } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { ArrowUpRight, Github } from "lucide-react";
 
 const categories = ["All", "Web App", "AI / ML", "SaaS", "Mobile", "Tools"];
 
 const projects = [
   {
-    title: "SAH ULTIMATE",
+    title: "SAH Ultimate",
     category: "SaaS",
-    description: "A premium all-in-one platform built for power users.",
-    tags: ["SaaS", "React", "TypeScript"],
+    tag: "SaaS",
+    desc: "An all-in-one productivity and project management SaaS platform with team collaboration, task tracking, time management, and analytics dashboard.",
+    stack: ["React", "Node.js", "PostgreSQL", "Redis"],
     color: "#2563EB",
-    gradient: "linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)",
-    status: "private" as const,
-    emoji: "🏆",
+    bg: "linear-gradient(135deg, #EFF6FF, #DBEAFE)",
+    emoji: "🚀",
   },
   {
     title: "Post Agent",
     category: "AI / ML",
-    description: "AI-powered social media automation agent that creates and schedules content autonomously.",
-    tags: ["AI Agent", "Automation", "LLM"],
-    color: "#8B5CF6",
-    gradient: "linear-gradient(135deg, #5B21B6 0%, #8B5CF6 100%)",
-    status: "private" as const,
+    tag: "AI / ML",
+    desc: "AI-powered social media automation agent that generates, schedules, and publishes posts across Twitter, LinkedIn, and Instagram using GPT-4.",
+    stack: ["Python", "LangChain", "OpenAI", "FastAPI"],
+    color: "#7C3AED",
+    bg: "linear-gradient(135deg, #F5F3FF, #EDE9FE)",
     emoji: "🤖",
   },
   {
     title: "Prompt Pilot",
-    category: "AI / ML",
-    description: "Advanced prompt engineering platform for building and testing LLM workflows.",
-    tags: ["Prompt Engineering", "OpenAI", "Node.js"],
-    color: "#0EA5E9",
-    gradient: "linear-gradient(135deg, #0369A1 0%, #38BDF8 100%)",
-    status: "private" as const,
-    emoji: "🧠",
+    category: "Tools",
+    tag: "Tools",
+    desc: "A prompt engineering workspace for developers and AI enthusiasts — organize, test, version, and share prompts with team collaboration features.",
+    stack: ["Next.js", "TypeScript", "Supabase", "OpenAI"],
+    color: "#059669",
+    bg: "linear-gradient(135deg, #ECFDF5, #D1FAE5)",
+    emoji: "✍️",
   },
   {
     title: "Nexa AI",
     category: "AI / ML",
-    description: "Intelligent AI assistant platform with custom knowledge base and multi-agent orchestration.",
-    tags: ["LLM", "RAG", "Python"],
-    color: "#059669",
-    gradient: "linear-gradient(135deg, #065F46 0%, #059669 100%)",
-    status: "private" as const,
-    emoji: "⚡",
+    tag: "AI / ML",
+    desc: "Intelligent customer support platform with AI-powered ticket classification, auto-response generation, sentiment analysis, and agent hand-off.",
+    stack: ["React", "Python", "LangChain", "PostgreSQL"],
+    color: "#D97706",
+    bg: "linear-gradient(135deg, #FFFBEB, #FEF3C7)",
+    emoji: "🧠",
   },
   {
     title: "Mythos",
     category: "Web App",
-    description: "Immersive storytelling platform with AI-generated narrative worlds.",
-    tags: ["Next.js", "AI", "Creative"],
-    color: "#DB2777",
-    gradient: "linear-gradient(135deg, #9D174D 0%, #EC4899 100%)",
-    status: "private" as const,
+    tag: "Web App",
+    desc: "A world-building and collaborative storytelling platform for writers — character maps, timeline editor, rich text editor, and co-authoring tools.",
+    stack: ["React", "Node.js", "MongoDB", "Socket.io"],
+    color: "#DC2626",
+    bg: "linear-gradient(135deg, #FFF1F2, #FFE4E6)",
     emoji: "📖",
   },
   {
     title: "GhostHub",
-    category: "Tools",
-    description: "Developer productivity hub with automated code review and deployment pipelines.",
-    tags: ["DevOps", "CI/CD", "TypeScript"],
-    color: "#475569",
-    gradient: "linear-gradient(135deg, #1E293B 0%, #475569 100%)",
-    status: "private" as const,
+    category: "SaaS",
+    tag: "SaaS",
+    desc: "Ghost blogging platform management hub — multi-site dashboard, post scheduler, analytics aggregator, and subscriber management across Ghost instances.",
+    stack: ["Next.js", "Ghost API", "Vercel", "Tailwind"],
+    color: "#0369A1",
+    bg: "linear-gradient(135deg, #F0F9FF, #E0F2FE)",
     emoji: "👻",
   },
   {
     title: "Data AI",
     category: "AI / ML",
-    description: "Natural language interface for querying databases and generating business intelligence reports.",
-    tags: ["NLP", "PostgreSQL", "Analytics"],
-    color: "#D97706",
-    gradient: "linear-gradient(135deg, #92400E 0%, #F59E0B 100%)",
-    status: "private" as const,
+    tag: "AI / ML",
+    desc: "Natural language data querying tool — ask questions in plain English and get SQL-backed answers, charts, and insights from your database.",
+    stack: ["Python", "OpenAI", "Pandas", "FastAPI", "React"],
+    color: "#6366F1",
+    bg: "linear-gradient(135deg, #EEF2FF, #E0E7FF)",
     emoji: "📊",
   },
   {
     title: "GoBook",
-    category: "SaaS",
-    description: "Smart booking and scheduling SaaS for service-based businesses.",
-    tags: ["SaaS", "Stripe", "React"],
-    color: "#2563EB",
-    gradient: "linear-gradient(135deg, #1E40AF 0%, #60A5FA 100%)",
-    status: "coming-soon" as const,
+    category: "Mobile",
+    tag: "Mobile",
+    desc: "Mobile-first appointment booking app for service businesses — calendar sync, payment integration, automated reminders, and business analytics.",
+    stack: ["React Native", "Expo", "Node.js", "Stripe"],
+    color: "#BE185D",
+    bg: "linear-gradient(135deg, #FDF2F8, #FCE7F3)",
     emoji: "📅",
   },
   {
     title: "CodeBlade",
     category: "Tools",
-    description: "Next-generation code editor with inline AI suggestions and pair-programming mode.",
-    tags: ["IDE", "AI", "WebAssembly"],
-    color: "#7C3AED",
-    gradient: "linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%)",
-    status: "coming-soon" as const,
+    tag: "Tools",
+    desc: "VS Code extension and web app for code review automation — AI-powered code suggestions, security scanning, and team review workflow.",
+    stack: ["TypeScript", "VS Code API", "OpenAI", "Node.js"],
+    color: "#475569",
+    bg: "linear-gradient(135deg, #F8FAFC, #F1F5F9)",
     emoji: "⚔️",
   },
   {
     title: "CodeZen",
-    category: "Tools",
-    description: "Code quality and refactoring assistant that enforces best practices automatically.",
-    tags: ["Code Quality", "AST", "TypeScript"],
-    color: "#059669",
-    gradient: "linear-gradient(135deg, #064E3B 0%, #34D399 100%)",
-    status: "private" as const,
+    category: "SaaS",
+    tag: "SaaS",
+    desc: "Developer productivity SaaS — habit tracking for coding goals, GitHub activity visualization, streak leaderboards, and learning path recommendations.",
+    stack: ["React", "Next.js", "GitHub API", "Supabase"],
+    color: "#0891B2",
+    bg: "linear-gradient(135deg, #F0FDFA, #CCFBF1)",
     emoji: "🧘",
   },
   {
     title: "AdilStudio",
     category: "Web App",
-    description: "Personal portfolio and client project showcase platform.",
-    tags: ["Portfolio", "Next.js", "Framer"],
-    color: "#0f172a",
-    gradient: "linear-gradient(135deg, #0f172a 0%, #334155 100%)",
-    status: "coming-soon" as const,
-    emoji: "🎨",
+    tag: "Web App",
+    desc: "This very website — a premium digital agency portfolio built with React, Vite, Tailwind CSS, Framer Motion, and custom WebGL animations.",
+    stack: ["React", "Vite", "Tailwind", "Framer Motion"],
+    color: "#2563EB",
+    bg: "linear-gradient(135deg, #EFF6FF, #DBEAFE)",
+    emoji: "✨",
   },
   {
     title: "StockSense",
-    category: "SaaS",
-    description: "Real-time stock market intelligence with AI-driven pattern recognition and alerts.",
-    tags: ["FinTech", "AI", "Real-time"],
-    color: "#B45309",
-    gradient: "linear-gradient(135deg, #78350F 0%, #F59E0B 100%)",
-    status: "private" as const,
+    category: "AI / ML",
+    tag: "AI / ML",
+    desc: "AI-powered stock market analysis platform with sentiment analysis, earnings call summaries, technical indicators, and portfolio risk assessment.",
+    stack: ["Python", "FastAPI", "React", "TensorFlow", "Redis"],
+    color: "#059669",
+    bg: "linear-gradient(135deg, #ECFDF5, #D1FAE5)",
     emoji: "📈",
   },
 ];
 
 export default function PortfolioSection() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [visibleProjects, setVisibleProjects] = useState(projects);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const filtered = activeCategory === "All"
-    ? projects
-    : projects.filter((p) => p.category === activeCategory);
+  useEffect(() => {
+    const filtered = activeCategory === "All" ? projects : projects.filter(p => p.tag === activeCategory);
+    setVisibleProjects(filtered);
+  }, [activeCategory]);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); }),
+      { threshold: 0.06 }
+    );
+    sectionRef.current?.querySelectorAll(".animate-on-scroll")?.forEach(el => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
 
   return (
-    <section id="portfolio" className="section-block" style={{ background: "white" }}>
+    <section id="portfolio" ref={sectionRef} className="section-block" style={{ background: "white", position: "relative", overflow: "hidden" }}>
+      <style>{`
+        .portfolio-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        @media (min-width: 640px)  { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(3, 1fr); } }
+        .proj-card {
+          border: 1px solid #E2E8F0;
+          border-radius: 1.4rem;
+          overflow: hidden;
+          transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+          display: flex;
+          flex-direction: column;
+          cursor: default;
+        }
+        .proj-card:hover { transform: translateY(-6px); box-shadow: 0 20px 56px -8px rgba(37,99,235,0.15); border-color: #BFDBFE; }
+        .proj-card-header { padding: 1.4rem 1.4rem 1rem; }
+        .proj-card-body   { padding: 0 1.4rem 1.4rem; flex: 1; display: flex; flex-direction: column; gap: 0.7rem; }
+        .proj-stack-pill {
+          display: inline-flex;
+          padding: 3px 9px;
+          background: rgba(37,99,235,0.07);
+          color: #2563EB;
+          border-radius: 6px;
+          font-size: 0.72rem;
+          font-weight: 500;
+        }
+        .filter-btn {
+          padding: 7px 16px;
+          border-radius: 9px;
+          font-size: 0.82rem;
+          font-weight: 500;
+          border: 1px solid #E2E8F0;
+          background: white;
+          color: #64748B;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          font-family: inherit;
+        }
+        .filter-btn:hover { border-color: #BFDBFE; color: #2563EB; }
+        .filter-btn.active { background: #2563EB; color: white; border-color: #2563EB; }
+      `}</style>
+
+      <div style={{ position: "absolute", bottom: "-60px", left: "50%", transform: "translateX(-50%)", width:"500px", height:"200px", borderRadius:"50%", background:"radial-gradient(ellipse, rgba(37,99,235,0.06) 0%, transparent 70%)", pointerEvents:"none" }} />
+
       <div className="section-padding">
         <div className="container-wide">
-          {/* Header */}
-          <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-            <div style={{
-              display: "inline-flex", alignItems: "center", gap: "8px",
-              padding: "6px 16px", borderRadius: "999px",
-              background: "#F5F3FF", border: "1px solid #DDD6FE",
-              marginBottom: "1rem",
-            }}>
-              <span style={{ fontSize: "0.82rem", fontWeight: 600, color: "#8B5CF6", letterSpacing: "0.05em", textTransform: "uppercase" }}>
-                Our Work
-              </span>
+          <div className="animate-on-scroll" style={{ textAlign: "center", marginBottom: "2.5rem" }}>
+            <div className="section-label" style={{ justifyContent: "center" }}>
+              <span>💼</span> Portfolio
             </div>
-            <h2 style={{
-              fontSize: "clamp(2rem, 3.5vw, 3rem)",
-              fontWeight: 800, color: "#0f172a",
-              letterSpacing: "-0.02em", marginBottom: "1rem",
-            }}>
-              Projects We Have{" "}
-              <span className="text-gradient-violet">Built & Shipped</span>
+            <h2 style={{ fontSize: "clamp(1.9rem, 3.5vw, 3rem)", fontWeight: 800, color: "#0f172a", marginBottom: "0.85rem", letterSpacing: "-0.03em" }}>
+              Products We've <span className="text-gradient">Shipped</span>
             </h2>
-            <p style={{
-              fontSize: "1.05rem", color: "#64748B",
-              maxWidth: "36rem", margin: "0 auto", lineHeight: 1.75,
-            }}>
-              A selection of our digital products. Some are live, some are private — all are built with the same obsession for quality.
+            <p style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)", color: "#64748B", maxWidth: "38rem", margin: "0 auto", lineHeight: 1.72 }}>
+              12 real products. Real code. Real users. Each project represents a challenge solved and a client's vision brought to life.
             </p>
           </div>
 
-          {/* Filter tabs */}
-          <div style={{
-            display: "flex", flexWrap: "wrap", gap: "8px",
-            justifyContent: "center", marginBottom: "2.5rem",
-          }}>
-            {categories.map((cat) => (
+          {/* Filters */}
+          <div className="animate-on-scroll" style={{ display: "flex", flexWrap: "wrap", gap: "8px", justifyContent: "center", marginBottom: "2.5rem" }}>
+            {categories.map(cat => (
               <button
                 key={cat}
+                className={`filter-btn ${activeCategory === cat ? "active" : ""}`}
                 onClick={() => setActiveCategory(cat)}
-                style={{
-                  padding: "8px 18px",
-                  borderRadius: "999px",
-                  fontSize: "0.875rem",
-                  fontWeight: 500,
-                  border: "none",
-                  cursor: "pointer",
-                  transition: "all 0.2s ease",
-                  background: activeCategory === cat ? "#2563EB" : "#F1F5F9",
-                  color: activeCategory === cat ? "white" : "#64748B",
-                  boxShadow: activeCategory === cat ? "0 4px 12px rgba(37,99,235,0.3)" : "none",
-                }}
               >
                 {cat}
               </button>
@@ -193,111 +222,55 @@ export default function PortfolioSection() {
           </div>
 
           {/* Grid */}
-          <div style={{ display: "grid", gap: "1.25rem" }} className="portfolio-grid">
-            <style>{`
-              @media (min-width: 640px)  { .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; } }
-              @media (min-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(3, 1fr) !important; } }
-              @media (min-width: 1280px) { .portfolio-grid { grid-template-columns: repeat(4, 1fr) !important; } }
-              .portfolio-card { transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1); cursor:pointer; }
-              .portfolio-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-            `}</style>
-
-            {filtered.map((project) => (
-              <div
-                key={project.title}
-                className="portfolio-card"
-                style={{
-                  borderRadius: "1.25rem",
-                  border: "1px solid #E2E8F0",
-                  overflow: "hidden",
-                  background: "white",
-                }}
-              >
-                {/* Visual preview */}
-                <div style={{
-                  height: "160px",
-                  background: project.gradient,
-                  position: "relative",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                }}>
-                  <span style={{ fontSize: "3.5rem", filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.3))" }}>
-                    {project.emoji}
-                  </span>
-
-                  {/* Status badge */}
-                  {project.status === "private" && (
-                    <div style={{
-                      position: "absolute", top: "10px", right: "10px",
-                      display: "flex", alignItems: "center", gap: "5px",
-                      padding: "4px 10px", borderRadius: "999px",
-                      background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)",
-                      color: "rgba(255,255,255,0.9)", fontSize: "0.72rem", fontWeight: 600,
+          <div className="portfolio-grid">
+            {visibleProjects.map((proj, i) => (
+              <div key={proj.title} className="proj-card animate-on-scroll" style={{ transitionDelay: `${(i % 3) * 65}ms` }}>
+                {/* Card header with gradient bg */}
+                <div className="proj-card-header" style={{ background: proj.bg }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "0.5rem" }}>
+                    <div style={{ fontSize: "2rem" }}>{proj.emoji}</div>
+                    <span style={{
+                      padding: "3px 10px", borderRadius: "6px",
+                      background: "rgba(255,255,255,0.7)", border: "1px solid rgba(255,255,255,0.9)",
+                      fontSize: "0.72rem", fontWeight: 600, color: proj.color,
+                      backdropFilter: "blur(8px)",
                     }}>
-                      <Lock size={10} /> Private Project
-                    </div>
-                  )}
-                  {project.status === "coming-soon" && (
-                    <div style={{
-                      position: "absolute", top: "10px", right: "10px",
-                      display: "flex", alignItems: "center", gap: "5px",
-                      padding: "4px 10px", borderRadius: "999px",
-                      background: "rgba(245,158,11,0.9)", backdropFilter: "blur(8px)",
-                      color: "white", fontSize: "0.72rem", fontWeight: 600,
-                    }}>
-                      <Clock size={10} /> Coming Soon
-                    </div>
-                  )}
-
-                  {/* Category */}
-                  <div style={{
-                    position: "absolute", bottom: "10px", left: "10px",
-                    padding: "3px 10px", borderRadius: "999px",
-                    background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)",
-                    fontSize: "0.72rem", fontWeight: 600, color: "rgba(255,255,255,0.9)",
-                  }}>
-                    {project.category}
+                      {proj.tag}
+                    </span>
                   </div>
+                  <h3 style={{ fontSize: "1.05rem", fontWeight: 700, color: "#0f172a", margin: 0 }}>{proj.title}</h3>
                 </div>
 
-                {/* Content */}
-                <div style={{ padding: "1.25rem" }}>
-                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "6px" }}>
-                    <h3 style={{ fontSize: "0.975rem", fontWeight: 700, color: "#0f172a" }}>
-                      {project.title}
-                    </h3>
-                    <ArrowUpRight size={15} style={{ color: "#94A3B8", flexShrink: 0, marginLeft: "6px", marginTop: "2px" }} />
-                  </div>
-                  <p style={{ fontSize: "0.82rem", color: "#64748B", lineHeight: 1.6, marginBottom: "1rem" }}>
-                    {project.description}
-                  </p>
+                <div className="proj-card-body">
+                  <p style={{ fontSize: "0.83rem", color: "#64748B", lineHeight: 1.7, margin: 0 }}>{proj.desc}</p>
+
+                  {/* Stack */}
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
-                    {project.tags.map((tag) => (
-                      <span key={tag} style={{
-                        padding: "3px 8px", borderRadius: "6px",
-                        background: "#F1F5F9", color: "#475569",
-                        fontSize: "0.72rem", fontWeight: 500,
-                      }}>
-                        {tag}
-                      </span>
+                    {proj.stack.map(s => (
+                      <span key={s} className="proj-stack-pill">{s}</span>
                     ))}
+                  </div>
+
+                  {/* Actions */}
+                  <div style={{ display: "flex", gap: "8px", marginTop: "auto" }}>
+                    <a href="https://github.com/tokenanalyzer" target="_blank" rel="noopener noreferrer"
+                      style={{ display:"inline-flex", alignItems:"center", gap:"5px", fontSize:"0.78rem", fontWeight:600, color:"#64748B", textDecoration:"none" }}>
+                      <Github size={14} /> Code
+                    </a>
+                    <span style={{ color: "#E2E8F0" }}>|</span>
+                    <span style={{ display:"inline-flex", alignItems:"center", gap:"4px", fontSize:"0.78rem", fontWeight:600, color:proj.color, cursor:"pointer" }}>
+                      View Details <ArrowUpRight size={13} />
+                    </span>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* CTA */}
-          <div style={{ textAlign: "center", marginTop: "3rem" }}>
-            <button
-              onClick={() => {
-                const el = document.querySelector("#contact");
-                if (el) el.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="btn-primary"
-              style={{ display: "inline-flex" }}
-            >
-              Start Your Project <ArrowUpRight size={16} />
-            </button>
+          <div className="animate-on-scroll" style={{ textAlign: "center", marginTop: "2.5rem" }}>
+            <a href="https://github.com/tokenanalyzer" target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ display: "inline-flex" }}>
+              <Github size={16} /> View All on GitHub <ArrowUpRight size={15} />
+            </a>
           </div>
         </div>
       </div>

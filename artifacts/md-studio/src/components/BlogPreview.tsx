@@ -1,84 +1,109 @@
+import { useEffect, useRef } from "react";
 import { Clock, ArrowUpRight, Rss } from "lucide-react";
 
+const posts = [
+  {
+    tag: "AI Development",
+    tagColor: "#7C3AED",
+    tagBg: "#F5F3FF",
+    title: "Building Production-Ready AI Agents with LangChain and GPT-4",
+    excerpt: "A deep-dive into architecting reliable, scalable AI agents — memory management, tool use, error handling, and deployment strategies.",
+    readTime: "12 min read",
+    date: "June 2026",
+    emoji: "🤖",
+  },
+  {
+    tag: "SaaS Development",
+    tagColor: "#2563EB",
+    tagBg: "#EFF6FF",
+    title: "The Modern SaaS Stack: From Zero to Production in 2026",
+    excerpt: "React, Next.js, Supabase, Stripe, and Vercel — the exact stack we use to build SaaS products that scale to millions of users.",
+    readTime: "9 min read",
+    date: "May 2026",
+    emoji: "☁️",
+  },
+  {
+    tag: "Engineering",
+    tagColor: "#059669",
+    tagBg: "#ECFDF5",
+    title: "Why TypeScript First is Non-Negotiable for Serious Products",
+    excerpt: "After 8 years and 127+ projects, TypeScript has saved us more hours in debugging than any other single decision we've made as engineers.",
+    readTime: "7 min read",
+    date: "April 2026",
+    emoji: "📝",
+  },
+];
+
 export default function BlogPreview() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); }),
+      { threshold: 0.06 }
+    );
+    sectionRef.current?.querySelectorAll(".animate-on-scroll")?.forEach(el => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
   return (
-    <section id="blog" className="section-block" style={{ background: "#F8FAFC" }}>
+    <section id="blog" ref={sectionRef} className="section-block" style={{ background: "white", position: "relative" }}>
+      <style>{`
+        .blog-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        @media (min-width: 768px)  { .blog-grid { grid-template-columns: repeat(3, 1fr); } }
+        .blog-card {
+          border: 1px solid #E2E8F0;
+          border-radius: 1.25rem;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px -8px rgba(37,99,235,0.12); border-color: #BFDBFE; }
+      `}</style>
+
       <div className="section-padding">
         <div className="container-wide">
-          {/* Header */}
-          <div style={{
-            display: "flex", alignItems: "flex-end", justifyContent: "space-between",
-            flexWrap: "wrap", gap: "1rem", marginBottom: "3rem",
-          }}>
+          <div className="animate-on-scroll" style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: "1rem", marginBottom: "2.5rem" }}>
             <div>
-              <div style={{
-                display: "inline-flex", alignItems: "center", gap: "8px",
-                padding: "6px 16px", borderRadius: "999px",
-                background: "#FFF7ED", border: "1px solid #FED7AA",
-                marginBottom: "1rem",
-              }}>
-                <span style={{ fontSize: "0.82rem", fontWeight: 600, color: "#D97706", letterSpacing: "0.05em", textTransform: "uppercase" }}>
-                  Insights
-                </span>
-              </div>
-              <h2 style={{
-                fontSize: "clamp(2rem, 3.5vw, 3rem)",
-                fontWeight: 800, color: "#0f172a",
-                letterSpacing: "-0.02em", marginBottom: "0.75rem",
-              }}>
-                Thoughts &{" "}
-                <span className="text-gradient">Insights</span>
+              <div className="section-label"><Rss size={12} /> Blog &amp; Insights</div>
+              <h2 style={{ fontSize: "clamp(1.9rem, 3.5vw, 3rem)", fontWeight: 800, color: "#0f172a", margin: "0", letterSpacing: "-0.03em" }}>
+                From the <span className="text-gradient">Engineering Desk</span>
               </h2>
-              <p style={{ fontSize: "1rem", color: "#64748B", lineHeight: 1.65 }}>
-                Articles on development, AI, and building digital products.
-              </p>
             </div>
-            <button className="btn-secondary" style={{ display: "inline-flex" }}>
-              All Articles <ArrowUpRight size={15} />
-            </button>
+            <a href="#blog" className="btn-ghost" style={{ color: "#2563EB" }}>
+              View All Posts <ArrowUpRight size={15} />
+            </a>
           </div>
 
-          {/* Coming soon state */}
-          <div style={{
-            background: "white",
-            borderRadius: "1.5rem",
-            padding: "5rem 2rem",
-            border: "1px solid #E2E8F0",
-            textAlign: "center",
-          }}>
-            <div style={{
-              width: "72px", height: "72px", borderRadius: "50%",
-              background: "linear-gradient(135deg, #FFF7ED, #FFFBEB)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              margin: "0 auto 1.5rem",
-              border: "2px solid #FED7AA",
-            }}>
-              <Rss size={30} style={{ color: "#D97706" }} />
-            </div>
-
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: "center", marginBottom: "1rem" }}>
-              <Clock size={18} style={{ color: "#94A3B8" }} />
-              <span style={{ fontSize: "1rem", fontWeight: 600, color: "#64748B" }}>
-                Articles coming soon
-              </span>
-            </div>
-
-            <p style={{
-              fontSize: "0.95rem", color: "#94A3B8", maxWidth: "28rem",
-              margin: "0 auto", lineHeight: 1.7,
-            }}>
-              We're preparing high-quality content on full-stack development, AI engineering, 
-              and building scalable digital products. Follow us on{" "}
-              <a
-                href="https://x.com/Husain3413"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#2563EB", fontWeight: 600, textDecoration: "none" }}
-              >
-                Twitter/X
-              </a>{" "}
-              for updates.
-            </p>
+          <div className="blog-grid">
+            {posts.map((post, i) => (
+              <article key={post.title} className="blog-card animate-on-scroll" style={{ transitionDelay: `${i * 80}ms` }}>
+                {/* Header */}
+                <div style={{ background: `linear-gradient(135deg, ${post.tagBg}, white)`, padding: "1.4rem 1.4rem 1rem", fontSize: "2rem" }}>
+                  {post.emoji}
+                </div>
+                <div style={{ padding: "0 1.4rem 1.4rem", display: "flex", flexDirection: "column", gap: "0.65rem", flex: 1 }}>
+                  <span style={{ display: "inline-block", padding: "3px 10px", background: post.tagBg, color: post.tagColor, borderRadius: "6px", fontSize: "0.72rem", fontWeight: 600, alignSelf: "flex-start" }}>
+                    {post.tag}
+                  </span>
+                  <h3 style={{ fontSize: "0.98rem", fontWeight: 700, color: "#0f172a", lineHeight: 1.45, margin: 0 }}>{post.title}</h3>
+                  <p style={{ fontSize: "0.82rem", color: "#64748B", lineHeight: 1.7, margin: 0 }}>{post.excerpt}</p>
+                  <div style={{ display: "flex", alignItems: "center", gap: "1rem", fontSize: "0.75rem", color: "#94A3B8", marginTop: "auto", paddingTop: "0.75rem", borderTop: "1px solid #F1F5F9" }}>
+                    <span style={{ display: "flex", alignItems: "center", gap: "4px" }}><Clock size={12} /> {post.readTime}</span>
+                    <span>{post.date}</span>
+                    <span style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "4px", color: "#2563EB", fontWeight: 600 }}>
+                      Read <ArrowUpRight size={12} />
+                    </span>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </div>
