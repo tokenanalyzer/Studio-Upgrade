@@ -17,11 +17,8 @@ const links = {
     { label: "API Integration",   href: "#services" },
   ],
   Legal: [
-    { label: "Privacy Policy",    href: "/privacy-policy" },
+    { label: "Privacy Policy",    href: "/privacy" },
     { label: "Terms of Service",  href: "/terms" },
-    { label: "Refund Policy",     href: "/refund-policy" },
-    { label: "Disclaimer",        href: "/disclaimer" },
-    { label: "Cookie Policy",     href: "/cookie-policy" },
   ],
 };
 

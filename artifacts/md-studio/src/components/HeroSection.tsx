@@ -71,7 +71,8 @@ export default function HeroSection() {
           z-index: 10;
           min-height: calc(100svh - ${NAV_H}px);
           display: flex;
-          align-items: center;
+          flex-direction: column;
+          align-items: stretch;
           padding: 2.5rem 0 2rem;
         }
         @media (min-width: 1024px) {
@@ -80,8 +81,13 @@ export default function HeroSection() {
             height: calc(100dvh - ${NAV_H}px);
             min-height: 600px;
             padding: 0;
-            align-items: stretch;
           }
+        }
+        .hero-inner > .container-wide {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          height: 100%;
         }
         /* Grid */
         .hero-grid {
@@ -89,6 +95,7 @@ export default function HeroSection() {
           flex-direction: column;
           gap: 0;
           width: 100%;
+          flex: 1;
         }
         @media (min-width: 1024px) {
           .hero-grid {
@@ -108,9 +115,9 @@ export default function HeroSection() {
         }
         @media (min-width: 1024px) {
           .hero-text {
-            padding-top: 7vh;
+            padding-top: 0;
             padding-bottom: 0;
-            justify-content: flex-start;
+            justify-content: center;
           }
         }
         /* Orb col */
