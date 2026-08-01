@@ -64,7 +64,7 @@ export default function WhyChooseSection() {
   useAnimateOnScroll(headRef as React.RefObject<HTMLElement>);
 
   return (
-    <section id="why-choose" style={{ position: "relative", background: "white", overflow: "hidden" }} className="section-block">
+    <section id="why-choose" style={{ position: "relative", background: "var(--bg-page)", overflow: "hidden" }} className="section-block">
       <style>{`
         .why-card {
           background: #fff;

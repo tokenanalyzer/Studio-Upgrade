@@ -24,7 +24,7 @@ export default function IndustriesSection() {
   }, []);
 
   return (
-    <section id="industries" ref={sectionRef} className="section-block" style={{ background: "white", position: "relative", overflow: "hidden" }}>
+    <section id="industries" ref={sectionRef} className="section-block" style={{ background: "var(--bg-page)", position: "relative", overflow: "hidden" }}>
       <style>{`
         .ind-grid {
           display: grid;

@@ -47,7 +47,7 @@ export default function CaseStudiesSection() {
   }, []);
 
   return (
-    <section id="case-studies" ref={sectionRef} className="section-block" style={{ background: "#f8faff", position: "relative" }}>
+    <section id="case-studies" ref={sectionRef} className="section-block" style={{ background: "var(--bg-alt)", position: "relative" }}>
       <style>{`
         .case-grid {
           display: grid;

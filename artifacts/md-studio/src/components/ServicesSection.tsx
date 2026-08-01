@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { ArrowUpRight, Globe, AppWindow, Smartphone, Bot, Zap, Database, LayoutDashboard, Cloud, Plug, Palette, Brain, LineChart, Settings } from "lucide-react";
 
 const services = [
@@ -31,7 +32,7 @@ export default function ServicesSection() {
   }, []);
 
   return (
-    <section id="services" ref={sectionRef} className="section-block" style={{ background: "#f8faff", position: "relative", overflow: "hidden" }}>
+    <section id="services" ref={sectionRef} className="section-block" style={{ background: "var(--bg-alt)", position: "relative", overflow: "hidden" }}>
       <style>{`
         .svc-grid {
           display: grid;
@@ -84,11 +85,24 @@ export default function ServicesSection() {
             </p>
           </div>
 
-          <div className="svc-grid">
-            {services.map((svc, i) => {
+          <motion.div
+            className="svc-grid"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "0px 0px -60px 0px" }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.055 } } }}
+          >
+            {services.map((svc) => {
               const Icon = svc.icon;
               return (
-                <div key={svc.title} className="svc-card animate-on-scroll" style={{ transitionDelay: `${(i % 4) * 55}ms` }}>
+                <motion.div
+                  key={svc.title}
+                  className="svc-card"
+                  variants={{
+                    hidden:  { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] } },
+                  }}
+                >
                   <div style={{
                     width: "46px", height: "46px", borderRadius: "12px",
                     background: svc.bg, display: "flex", alignItems: "center", justifyContent: "center",
@@ -96,15 +110,15 @@ export default function ServicesSection() {
                   }}>
                     <Icon size={21} style={{ color: svc.color }} />
                   </div>
-                  <h3 style={{ fontSize: "0.95rem", fontWeight: 700, color: "#0f172a", margin: 0 }}>{svc.title}</h3>
-                  <p style={{ fontSize: "0.82rem", color: "#64748B", lineHeight: 1.68, margin: 0 }}>{svc.desc}</p>
+                  <h3 style={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--text-1)", margin: 0 }}>{svc.title}</h3>
+                  <p style={{ fontSize: "0.82rem", color: "var(--text-2)", lineHeight: 1.68, margin: 0 }}>{svc.desc}</p>
                   <div style={{ display: "flex", alignItems: "center", gap: "4px", fontSize: "0.78rem", fontWeight: 600, color: svc.color, marginTop: "auto" }}>
                     Learn more <ArrowUpRight size={13} />
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

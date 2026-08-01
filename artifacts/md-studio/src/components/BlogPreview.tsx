@@ -47,7 +47,7 @@ export default function BlogPreview() {
   }, []);
 
   return (
-    <section id="blog" ref={sectionRef} className="section-block" style={{ background: "white", position: "relative" }}>
+    <section id="blog" ref={sectionRef} className="section-block" style={{ background: "var(--bg-page)", position: "relative" }}>
       <style>{`
         .blog-grid {
           display: grid;

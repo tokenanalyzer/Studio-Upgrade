@@ -43,7 +43,7 @@ export default function ContactSection() {
     setForm(v => ({ ...v, [field]: e.target.value }));
 
   return (
-    <section id="contact" ref={sectionRef} className="section-block" style={{ background: "white", position: "relative", overflow: "hidden" }}>
+    <section id="contact" ref={sectionRef} className="section-block" style={{ background: "var(--bg-page)", position: "relative", overflow: "hidden" }}>
       <style>{`
         .contact-grid {
           display: flex;

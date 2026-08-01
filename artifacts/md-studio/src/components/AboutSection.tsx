@@ -33,7 +33,7 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="section-block" style={{ background: "#f8faff", position: "relative", overflow: "hidden" }}>
+    <section id="about" ref={sectionRef} className="section-block" style={{ background: "var(--bg-alt)", position: "relative", overflow: "hidden" }}>
       <style>{`
         .about-grid {
           display: flex;

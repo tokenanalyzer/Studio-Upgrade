@@ -127,7 +127,7 @@ export default function FloatingButtons() {
 
         {/* WhatsApp — always visible */}
         <a
-          href="https://wa.me/919967873413"
+          href={`https://wa.me/919967873413?text=${encodeURIComponent("Hi Adil! I visited your MD Studio website and I'm interested in discussing a project. Can we connect?")}`}
           target="_blank"
           rel="noopener noreferrer"
           title="Chat on WhatsApp"

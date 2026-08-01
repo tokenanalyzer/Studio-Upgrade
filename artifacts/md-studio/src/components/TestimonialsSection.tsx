@@ -59,7 +59,7 @@ export default function TestimonialsSection() {
   }, []);
 
   return (
-    <section id="testimonials" ref={sectionRef} className="section-block" style={{ background: "#f8faff", position: "relative", overflow: "hidden" }}>
+    <section id="testimonials" ref={sectionRef} className="section-block" style={{ background: "var(--bg-alt)", position: "relative", overflow: "hidden" }}>
       <style>{`
         .testimonial-grid {
           display: grid;

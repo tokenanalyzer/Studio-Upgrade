@@ -93,7 +93,7 @@ export default function FAQSection() {
   }, []);
 
   return (
-    <section id="faq" ref={sectionRef} className="section-block" style={{ background: "#f8faff", position: "relative" }}>
+    <section id="faq" ref={sectionRef} className="section-block" style={{ background: "var(--bg-alt)", position: "relative" }}>
       <div className="section-padding">
         <div className="container-wide">
           <div className="animate-on-scroll" style={{ textAlign: "center", marginBottom: "2.5rem" }}>
