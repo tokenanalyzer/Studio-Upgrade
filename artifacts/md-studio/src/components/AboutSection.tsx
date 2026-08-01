@@ -77,16 +77,26 @@ export default function AboutSection() {
           <div className="about-grid">
             {/* Left — identity card */}
             <div className="animate-on-scroll" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-              {/* Avatar */}
+              {/* Avatar — real photo */}
               <div style={{
                 width: "140px", height: "140px", borderRadius: "50%",
-                background: "linear-gradient(135deg, #EFF6FF, #DBEAFE)",
                 border: "4px solid white",
-                boxShadow: "0 8px 32px rgba(37,99,235,0.18)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "4rem", marginBottom: "1.5rem",
+                boxShadow: "0 8px 32px rgba(37,99,235,0.22)",
+                overflow: "hidden",
+                marginBottom: "1.5rem",
+                flexShrink: 0,
               }}>
-                👨‍💻
+                <img
+                  src={`${import.meta.env.BASE_URL}adil-hussain.png`}
+                  alt="Adil Hussain — Full Stack Developer & AI Engineer"
+                  loading="lazy"
+                  style={{
+                    width: "100%", height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center 12%",
+                    display: "block",
+                  }}
+                />
               </div>
 
               {/* Name & title */}
