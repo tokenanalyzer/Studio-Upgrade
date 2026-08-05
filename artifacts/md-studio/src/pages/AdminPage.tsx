@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NAV_H } from "@/components/Navbar";
 import { Logo } from "@/components/Navbar";
-import { Plus, Trash2, Save, LogOut, Eye, EyeOff, Package, Star, Settings, ChevronDown, ChevronUp, Edit3 } from "lucide-react";
+import { Plus, Trash2, Save, LogOut, Eye, EyeOff, Package, Star, Settings, ChevronDown, ChevronUp, FileText } from "lucide-react";
+import { blogPosts as defaultBlogPosts } from "@/data/blog";
 
 const ADMIN_PASSWORD = "mdstudio2025";
 const PORTFOLIO_KEY = "md-admin-portfolio";
 const TESTIMONIALS_KEY = "md-admin-testimonials";
+const BLOG_KEY = "md-admin-blog";
 
 /* ── Types ── */
 interface PortfolioItem {
@@ -318,10 +320,133 @@ function SettingsPanel() {
   );
 }
 
+/* ── Blog Posts Editor ── */
+interface AdminBlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  tag: string;
+  emoji: string;
+  date: string;
+  readTime: string;
+  published: boolean;
+  note: string;
+}
+
+function loadBlogPosts(): AdminBlogPost[] {
+  try {
+    return JSON.parse(localStorage.getItem(BLOG_KEY) || "null") ?? defaultBlogPosts.map(p => ({
+      id: p.slug,
+      title: p.title,
+      slug: p.slug,
+      excerpt: p.excerpt,
+      tag: p.tag,
+      emoji: p.emoji,
+      date: p.date,
+      readTime: p.readTime,
+      published: true,
+      note: "",
+    }));
+  } catch { return []; }
+}
+
+function BlogEditor() {
+  const [items, setItems] = useState<AdminBlogPost[]>(loadBlogPosts);
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const [saved, setSaved] = useState(false);
+
+  const save = () => {
+    localStorage.setItem(BLOG_KEY, JSON.stringify(items));
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
+
+  const add = () => {
+    const id = Date.now().toString();
+    setItems(prev => [...prev, { id, title: "New Article", slug: `new-article-${id}`, excerpt: "", tag: "Engineering", emoji: "📝", date: new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" }), readTime: "5 min read", published: false, note: "" }]);
+    setExpanded(id);
+  };
+
+  const remove = (id: string) => setItems(prev => prev.filter(i => i.id !== id));
+  const update = (id: string, field: keyof AdminBlogPost, value: string | boolean) =>
+    setItems(prev => prev.map(i => i.id === id ? { ...i, [field]: value } : i));
+
+  return (
+    <div>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1rem" }}>
+        <div>
+          <h2 style={{ color: "#f1f5f9", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>Blog Posts ({items.length})</h2>
+          <p style={{ color: "#64748b", fontSize: "0.8rem", marginTop: "4px" }}>Full article content is in <code style={{ color: "#60A5FA" }}>src/data/blog.ts</code></p>
+        </div>
+        <div style={{ display: "flex", gap: "10px" }}>
+          <button onClick={add} style={{ display: "flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: "rgba(37,99,235,0.15)", border: "1px solid rgba(37,99,235,0.3)", borderRadius: "8px", color: "#60A5FA", fontSize: "0.85rem", fontWeight: 500, cursor: "pointer", fontFamily: "inherit" }}>
+            <Plus size={14} /> New Post
+          </button>
+          <button onClick={save} style={{ display: "flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: saved ? "rgba(5,150,105,0.15)" : "rgba(37,99,235,0.9)", border: "none", borderRadius: "8px", color: "white", fontSize: "0.85rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
+            <Save size={14} /> {saved ? "Saved!" : "Save"}
+          </button>
+        </div>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        {items.map(post => (
+          <div key={post.id} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "12px", overflow: "hidden" }}>
+            <div onClick={() => setExpanded(expanded === post.id ? null : post.id)} style={{ padding: "1rem 1.25rem", display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <span style={{ fontSize: "1.4rem" }}>{post.emoji}</span>
+                <div>
+                  <div style={{ color: "#f1f5f9", fontWeight: 600, fontSize: "0.92rem" }}>{post.title}</div>
+                  <div style={{ color: "#64748b", fontSize: "0.75rem" }}>{post.tag} · {post.readTime} · {post.date}</div>
+                </div>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <span style={{ padding: "2px 8px", borderRadius: "999px", fontSize: "0.7rem", fontWeight: 600, background: post.published ? "rgba(5,150,105,0.12)" : "rgba(100,116,139,0.12)", color: post.published ? "#10B981" : "#64748b" }}>
+                  {post.published ? "Published" : "Draft"}
+                </span>
+                <button onClick={e => { e.stopPropagation(); remove(post.id); }} style={{ background: "none", border: "none", cursor: "pointer", color: "#EF4444", opacity: 0.6, padding: "4px" }}>
+                  <Trash2 size={14} />
+                </button>
+                {expanded === post.id ? <ChevronUp size={16} color="#64748b" /> : <ChevronDown size={16} color="#64748b" />}
+              </div>
+            </div>
+
+            {expanded === post.id && (
+              <div style={{ padding: "0 1.25rem 1.25rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                <Field label="Title" value={post.title} onChange={v => update(post.id, "title", v)} />
+                <Field label="URL Slug" value={post.slug} onChange={v => update(post.id, "slug", v)} />
+                <Field label="Tag / Category" value={post.tag} onChange={v => update(post.id, "tag", v)} />
+                <Field label="Emoji" value={post.emoji} onChange={v => update(post.id, "emoji", v)} />
+                <Field label="Date (e.g. June 2026)" value={post.date} onChange={v => update(post.id, "date", v)} />
+                <Field label="Read Time (e.g. 8 min read)" value={post.readTime} onChange={v => update(post.id, "readTime", v)} />
+                <div style={{ gridColumn: "1 / -1" }}>
+                  <Field label="Excerpt / Description" value={post.excerpt} onChange={v => update(post.id, "excerpt", v)} multiline />
+                </div>
+                <div style={{ gridColumn: "1 / -1" }}>
+                  <Field label="Internal Notes" value={post.note} onChange={v => update(post.id, "note", v)} multiline />
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <input type="checkbox" id={`pub-${post.id}`} checked={post.published} onChange={e => update(post.id, "published", e.target.checked)} />
+                  <label htmlFor={`pub-${post.id}`} style={{ color: "#94a3b8", fontSize: "0.85rem" }}>Published (visible on site)</label>
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "5px", color: "#60A5FA", fontSize: "0.82rem", textDecoration: "none" }}>
+                    <Eye size={13} /> Preview post →
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ── Main Admin Page ── */
 export default function AdminPage() {
   const [authed, setAuthed] = useState(() => sessionStorage.getItem("md-admin-auth") === "1");
-  const [tab, setTab] = useState<"portfolio" | "testimonials" | "settings">("portfolio");
+  const [tab, setTab] = useState<"portfolio" | "testimonials" | "blog" | "settings">("portfolio");
 
   const login = () => {
     sessionStorage.setItem("md-admin-auth", "1");
@@ -336,9 +461,10 @@ export default function AdminPage() {
   if (!authed) return <LoginGate onLogin={login} />;
 
   const tabs = [
-    { key: "portfolio" as const, label: "Portfolio", icon: Package },
+    { key: "portfolio" as const,    label: "Portfolio",    icon: Package },
     { key: "testimonials" as const, label: "Testimonials", icon: Star },
-    { key: "settings" as const, label: "Settings", icon: Settings },
+    { key: "blog" as const,         label: "Blog Posts",   icon: FileText },
+    { key: "settings" as const,     label: "Settings",     icon: Settings },
   ];
 
   return (
@@ -375,9 +501,10 @@ export default function AdminPage() {
         </div>
 
         {/* Content */}
-        {tab === "portfolio" && <PortfolioEditor />}
+        {tab === "portfolio"    && <PortfolioEditor />}
         {tab === "testimonials" && <TestimonialsEditor />}
-        {tab === "settings" && <SettingsPanel />}
+        {tab === "blog"         && <BlogEditor />}
+        {tab === "settings"     && <SettingsPanel />}
       </div>
     </div>
   );

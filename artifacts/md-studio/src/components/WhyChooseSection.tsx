@@ -1,77 +1,35 @@
-import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { Zap, Brain, Layers, Timer, ShieldCheck, HeartHandshake } from "lucide-react";
 
 const reasons = [
-  {
-    icon: Brain,
-    color: "#2563EB",
-    bg: "#EFF6FF",
-    title: "AI-First Engineering",
-    desc: "We don't bolt on AI as an afterthought — we architect products with intelligence at their core. From GPT integrations to custom ML pipelines.",
-  },
-  {
-    icon: Layers,
-    color: "#7C3AED",
-    bg: "#F5F3FF",
-    title: "Full-Stack Mastery",
-    desc: "Frontend, backend, mobile, cloud, databases — one team delivers everything. No coordination overhead, no communication gaps.",
-  },
-  {
-    icon: Zap,
-    color: "#D97706",
-    bg: "#FFFBEB",
-    title: "Lightning Delivery",
-    desc: "Agile sprints with weekly demos and continuous deployment. Most MVPs shipped within 4–8 weeks. We respect your time and roadmap.",
-  },
-  {
-    icon: Timer,
-    color: "#059669",
-    bg: "#ECFDF5",
-    title: "8+ Years Experience",
-    desc: "Adil Hussain brings hands-on senior-level engineering experience across SaaS, FinTech, AI, and enterprise software projects.",
-  },
-  {
-    icon: ShieldCheck,
-    color: "#0369A1",
-    bg: "#F0F9FF",
-    title: "Production Quality Code",
-    desc: "TypeScript-first, tested, documented, and built to scale. Every codebase is maintainable, secure, and ready for real traffic.",
-  },
-  {
-    icon: HeartHandshake,
-    color: "#DC2626",
-    bg: "#FFF1F2",
-    title: "Post-Launch Support",
-    desc: "We don't disappear after delivery. Every project includes 30-day support, and monthly retainers are available for ongoing work.",
-  },
+  { icon: Brain,        color: "#2563EB", bg: "#EFF6FF", title: "AI-First Engineering",     desc: "We don't bolt on AI as an afterthought — we architect products with intelligence at their core. From GPT integrations to custom ML pipelines." },
+  { icon: Layers,       color: "#7C3AED", bg: "#F5F3FF", title: "Full-Stack Mastery",       desc: "Frontend, backend, mobile, cloud, databases — one team delivers everything. No coordination overhead, no communication gaps." },
+  { icon: Zap,          color: "#D97706", bg: "#FFFBEB", title: "Lightning Delivery",       desc: "Agile sprints with weekly demos and continuous deployment. Most MVPs shipped within 4–8 weeks. We respect your time and roadmap." },
+  { icon: Timer,        color: "#059669", bg: "#ECFDF5", title: "8+ Years Experience",      desc: "Adil Hussain brings hands-on senior-level engineering experience across SaaS, FinTech, AI, and enterprise software projects." },
+  { icon: ShieldCheck,  color: "#0369A1", bg: "#F0F9FF", title: "Production Quality Code",  desc: "TypeScript-first, tested, documented, and built to scale. Every codebase is maintainable, secure, and ready for real traffic." },
+  { icon: HeartHandshake, color: "#DC2626", bg: "#FFF1F2", title: "Post-Launch Support",   desc: "We don't disappear after delivery. Every project includes 30-day support, and monthly retainers are available for ongoing work." },
 ];
 
-function useAnimateOnScroll(ref: React.RefObject<HTMLElement | null>) {
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { el.classList.add("visible"); obs.disconnect(); } },
-      { threshold: 0.12 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [ref]);
-}
+const cardVariants = {
+  hidden:  { opacity: 0, y: 28 },
+  visible: (i: number) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.5, delay: i * 0.08, ease: [0.25, 0.46, 0.45, 0.94] },
+  }),
+};
 
 export default function WhyChooseSection() {
-  const headRef = useRef<HTMLDivElement>(null);
-  useAnimateOnScroll(headRef as React.RefObject<HTMLElement>);
-
   return (
     <section id="why-choose" style={{ position: "relative", background: "var(--bg-page)", overflow: "hidden" }} className="section-block">
       <style>{`
         .why-card {
-          background: #fff;
-          border: 1px solid #E2E8F0;
+          background: var(--bg-card);
+          border: 1px solid var(--border);
           border-radius: 1.25rem;
           padding: 1.75rem;
-          transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+          display: flex;
+          flex-direction: column;
+          gap: 0.9rem;
           position: relative;
           overflow: hidden;
         }
@@ -81,7 +39,8 @@ export default function WhyChooseSection() {
           inset: 0;
           background: linear-gradient(135deg, rgba(37,99,235,0.03) 0%, transparent 60%);
           opacity: 0;
-          transition: opacity 0.35s;
+          transition: opacity 0.3s;
+          border-radius: inherit;
         }
         .why-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px -8px rgba(37,99,235,0.12); border-color: #BFDBFE; }
         .why-card:hover::before { opacity: 1; }
@@ -94,52 +53,47 @@ export default function WhyChooseSection() {
         @media (min-width: 1024px) { .why-grid { grid-template-columns: repeat(3, 1fr); } }
       `}</style>
 
-      {/* BG decoration */}
       <div style={{ position: "absolute", top: "-80px", right: "-80px", width: "320px", height: "320px", borderRadius: "50%", background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
 
       <div className="section-padding">
         <div className="container-wide">
-          {/* Header */}
-          <div ref={headRef} className="animate-on-scroll" style={{ textAlign: "center", marginBottom: "3rem" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+            transition={{ duration: 0.52 }}
+            style={{ textAlign: "center", marginBottom: "3rem" }}
+          >
             <div className="section-label" style={{ justifyContent: "center" }}>
-              <span>💡</span> Why Choose MD Studio
+              <span>⭐</span> Why MD Studio
             </div>
-            <h2 style={{ fontSize: "clamp(1.9rem, 3.5vw, 3rem)", fontWeight: 800, color: "#0f172a", marginBottom: "0.85rem", letterSpacing: "-0.03em" }}>
-              The Agency That Treats Your<br />
-              <span className="text-gradient">Project Like a Product</span>
+            <h2 style={{ fontSize: "clamp(1.9rem, 3.5vw, 3rem)", fontWeight: 800, color: "var(--text-1)", marginBottom: "0.85rem", letterSpacing: "-0.03em" }}>
+              Why Clients <span className="text-gradient">Choose Us</span>
             </h2>
-            <p style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.1rem)", color: "#64748B", maxWidth: "42rem", margin: "0 auto", lineHeight: 1.72 }}>
-              We're not a factory. We're a focused boutique studio where senior engineering meets product thinking.
+            <p style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)", color: "var(--text-2)", maxWidth: "42rem", margin: "0 auto", lineHeight: 1.72 }}>
+              We're not a faceless agency — we're a focused engineering team that treats every project like our own product.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Cards */}
-          <div className="why-grid">
+          <motion.div
+            className="why-grid"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "0px 0px -60px 0px" }}
+          >
             {reasons.map((r, i) => {
               const Icon = r.icon;
               return (
-                <div
-                  key={r.title}
-                  className="why-card animate-on-scroll"
-                  style={{ animationDelay: `${i * 80}ms`, transitionDelay: `${i * 60}ms` }}
-                >
-                  <div style={{
-                    width: "48px", height: "48px", borderRadius: "12px",
-                    background: r.bg, display: "flex", alignItems: "center", justifyContent: "center",
-                    marginBottom: "1rem", boxShadow: `0 4px 12px ${r.color}22`,
-                  }}>
+                <motion.div key={r.title} className="why-card" variants={cardVariants} custom={i}>
+                  <div style={{ width: "48px", height: "48px", borderRadius: "13px", background: r.bg, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: `0 4px 14px ${r.color}22`, flexShrink: 0 }}>
                     <Icon size={22} style={{ color: r.color }} />
                   </div>
-                  <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#0f172a", marginBottom: "0.5rem" }}>
-                    {r.title}
-                  </h3>
-                  <p style={{ fontSize: "0.88rem", color: "#64748B", lineHeight: 1.7, margin: 0 }}>
-                    {r.desc}
-                  </p>
-                </div>
+                  <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--text-1)", margin: 0 }}>{r.title}</h3>
+                  <p style={{ fontSize: "0.85rem", color: "var(--text-2)", lineHeight: 1.72, margin: 0 }}>{r.desc}</p>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
