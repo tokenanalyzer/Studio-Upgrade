@@ -5,6 +5,7 @@ import { Clock, ArrowLeft, Calendar, Tag, Share2, ArrowUpRight } from "lucide-re
 import Navbar, { NAV_H } from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getPostBySlug, blogPosts, type BlogBlock } from "@/data/blog";
+import { usePageSEO } from "@/hooks/usePageSEO";
 
 /* ── Reading progress bar ── */
 function ReadingProgress() {
@@ -79,6 +80,62 @@ function Block({ block }: { block: BlogBlock }) {
   }
 }
 
+function BlogPostSEO({ slug }: { slug: string }) {
+  const post = getPostBySlug(slug);
+  usePageSEO(post ? {
+    title: post.title,
+    description: post.excerpt,
+    canonical: `/blog/${post.slug}`,
+    type: "article",
+    publishedTime: post.dateISO,
+    author: post.author,
+    tags: post.tags,
+    schema: [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": post.title,
+        "description": post.excerpt,
+        "url": `https://mdstudio.dev/blog/${post.slug}`,
+        "datePublished": post.dateISO,
+        "dateModified": post.dateISO,
+        "author": {
+          "@type": "Person",
+          "name": "Adil Hussain",
+          "url": "https://mdstudio.dev",
+          "image": "https://mdstudio.dev/adil-hussain.png",
+          "sameAs": ["https://github.com/mdstudio-adil", "https://linkedin.com/in/adilhussain-dev"]
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "MD Studio",
+          "url": "https://mdstudio.dev",
+          "logo": { "@type": "ImageObject", "url": "https://mdstudio.dev/favicon.svg" }
+        },
+        "keywords": post.tags.join(", "),
+        "articleSection": post.tag,
+        "timeRequired": post.readTime,
+        "inLanguage": "en-US",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": `https://mdstudio.dev/blog/${post.slug}` }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home",   "item": "https://mdstudio.dev/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog",   "item": "https://mdstudio.dev/blog" },
+          { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://mdstudio.dev/blog/${post.slug}` }
+        ]
+      }
+    ]
+  } : {
+    title: "Article Not Found | MD Studio",
+    description: "This article could not be found.",
+    canonical: "/blog",
+  });
+  return null;
+}
+
 export default function BlogPostPage() {
   const [, params] = useRoute("/blog/:slug");
   const [, nav] = useLocation();
@@ -87,6 +144,7 @@ export default function BlogPostPage() {
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
+  // SEO is handled by a separate component so hooks run unconditionally
   if (!post) {
     return (
       <>
@@ -103,6 +161,7 @@ export default function BlogPostPage() {
     );
   }
 
+  // SEO injected as sibling — hooks stay at top level
   const related = blogPosts.filter(p => p.slug !== slug).slice(0, 2);
 
   const share = () => {

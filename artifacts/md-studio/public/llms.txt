@@ -1,0 +1,67 @@
+# MD Studio
+
+> Full Stack & AI Development Agency by Adil Hussain — India
+
+MD Studio is a boutique software development agency founded and run by Adil Hussain, a Full Stack Developer and AI Engineer with 8+ years of experience. The agency delivers scalable web applications, AI agents, SaaS platforms, and mobile products for clients across India, the USA, UK, UAE, Canada, and Australia.
+
+## About the Founder
+
+**Adil Hussain** is a Full Stack Developer and AI Engineer based in India. He specializes in building production-ready AI agents using LangChain and GPT-4, scalable SaaS applications, and enterprise-grade web products. He has delivered 127+ projects with a 5.0 star average rating from 89+ clients worldwide.
+
+- GitHub: https://github.com/mdstudio-adil
+- LinkedIn: https://linkedin.com/in/adilhussain-dev
+- Email: adilhusain3176@gmail.com
+- WhatsApp: +91 9967873413
+
+## Services
+
+MD Studio offers the following professional software development services:
+
+- **Full Stack Web Development** — React, Next.js, Node.js, TypeScript, Python
+- **AI Agent Development** — LangChain, GPT-4, RAG pipelines, autonomous agents
+- **SaaS Platform Development** — subscription billing, multi-tenancy, dashboards
+- **Mobile App Development** — React Native, Expo (iOS and Android)
+- **API Development** — RESTful APIs, GraphQL, third-party integrations
+- **Database Design** — PostgreSQL, MongoDB, Supabase, Redis
+- **Cloud & DevOps** — AWS, Vercel, Docker, CI/CD pipelines
+- **UI/UX Design** — Figma design systems, component libraries
+- **Business Automation** — workflow automation, custom CRMs
+- **AI Integration** — embedding AI into existing products and workflows
+
+## Technology Stack
+
+**Frontend**: React 19, Next.js 15, TypeScript, Tailwind CSS, Framer Motion, Three.js  
+**Backend**: Node.js, Express, Python, FastAPI, Django  
+**AI/ML**: OpenAI GPT-4, LangChain, Pinecone, Hugging Face, LlamaIndex  
+**Mobile**: React Native, Expo  
+**Databases**: PostgreSQL, MongoDB, Supabase, Redis, Pinecone (vector)  
+**Cloud**: AWS, Vercel, Fly.io, Railway, Docker  
+**Tools**: GitHub Actions, Stripe, Twilio, SendGrid  
+
+## Pricing
+
+- Simple websites: from ₹15,000 (approx. $180 USD)
+- Web applications: from ₹50,000 (approx. $600 USD)
+- AI agents and SaaS platforms: priced by scope
+- Monthly retainers available for ongoing work
+- International payments accepted (wire transfer, PayPal, Wise)
+
+## Client Testimonials Summary
+
+MD Studio has a 5.0 star rating from 89+ clients. Clients include founders from the USA, Saudi Arabia, UK, UAE, Canada, and India. Projects span fintech, e-commerce, healthcare, SaaS, and enterprise software.
+
+## Blog & Expertise
+
+MD Studio publishes in-depth engineering articles at https://mdstudio.dev/blog covering:
+
+- Building production-ready AI agents with LangChain and GPT-4
+- The modern SaaS stack for 2026 (Next.js, Supabase, Stripe, Vercel)
+- TypeScript-first engineering for serious products
+
+## Contact
+
+- **Website**: https://mdstudio.dev
+- **Email**: adilhusain3176@gmail.com
+- **WhatsApp**: +91 9967873413
+- **Location**: India (serves clients worldwide)
+- **Availability**: Open to new projects

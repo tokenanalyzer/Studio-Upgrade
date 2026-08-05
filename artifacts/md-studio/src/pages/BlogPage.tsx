@@ -5,6 +5,7 @@ import { Clock, ArrowUpRight, Rss, Search, ArrowLeft } from "lucide-react";
 import Navbar, { NAV_H } from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/data/blog";
+import { usePageSEO } from "@/hooks/usePageSEO";
 
 const allTags = Array.from(new Set(blogPosts.flatMap(p => p.tags)));
 
@@ -12,6 +13,29 @@ export default function BlogPage() {
   const [, nav] = useLocation();
   const [search, setSearch] = useState("");
   const [activeTag, setActiveTag] = useState<string | null>(null);
+
+  usePageSEO({
+    title: "Blog — Engineering Insights on AI, SaaS & Full Stack Development",
+    description: "In-depth articles on building production-ready AI agents, modern SaaS architecture, TypeScript best practices, and full stack engineering — by Adil Hussain, MD Studio.",
+    canonical: "/blog",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "MD Studio Engineering Blog",
+      "description": "Deep-dives on AI development, SaaS architecture, and engineering best practices.",
+      "url": "https://mdstudio.dev/blog",
+      "author": { "@type": "Person", "name": "Adil Hussain" },
+      "blogPost": blogPosts.map(p => ({
+        "@type": "BlogPosting",
+        "headline": p.title,
+        "description": p.excerpt,
+        "url": `https://mdstudio.dev/blog/${p.slug}`,
+        "datePublished": p.dateISO,
+        "author": { "@type": "Person", "name": "Adil Hussain" },
+        "keywords": p.tags.join(", "),
+      })),
+    },
+  });
 
   const filtered = blogPosts.filter(p => {
     const matchSearch = !search || p.title.toLowerCase().includes(search.toLowerCase()) || p.excerpt.toLowerCase().includes(search.toLowerCase());
