@@ -57,6 +57,20 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    // three-vendor (three.js + @react-three) is lazy-loaded only when GlassOrb
+    // renders and can't shrink further — raise the limit past its real size.
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return;
+          if (/[\\/](three|@react-three)[\\/]/.test(id)) return "three-vendor";
+          if (id.includes("framer-motion")) return "motion-vendor";
+          if (id.includes("@radix-ui")) return "radix-vendor";
+          if (/[\\/](react|react-dom|scheduler)[\\/]/.test(id)) return "react-vendor";
+        },
+      },
+    },
   },
   server: {
     port,
