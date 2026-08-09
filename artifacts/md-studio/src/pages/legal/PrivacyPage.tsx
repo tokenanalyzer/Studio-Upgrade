@@ -8,6 +8,14 @@ export default function PrivacyPage() {
     title: "Privacy Policy",
     description: "MD Studio's Privacy Policy — how we collect, use, and protect your personal data when you visit our website or engage our software development services.",
     canonical: "/privacy",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mdstudio.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://mdstudio.dev/privacy" },
+      ],
+    },
   });
 
   return (

@@ -8,6 +8,14 @@ export default function TermsPage() {
     title: "Terms of Service",
     description: "MD Studio's Terms of Service — the terms and conditions governing use of our website and software development services.",
     canonical: "/terms",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mdstudio.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "Terms of Service", "item": "https://mdstudio.dev/terms" },
+      ],
+    },
   });
 
   return (

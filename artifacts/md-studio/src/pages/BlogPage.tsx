@@ -18,23 +18,33 @@ export default function BlogPage() {
     title: "Blog — Engineering Insights on AI, SaaS & Full Stack Development",
     description: "In-depth articles on building production-ready AI agents, modern SaaS architecture, TypeScript best practices, and full stack engineering — by Adil Hussain, MD Studio.",
     canonical: "/blog",
-    schema: {
-      "@context": "https://schema.org",
-      "@type": "Blog",
-      "name": "MD Studio Engineering Blog",
-      "description": "Deep-dives on AI development, SaaS architecture, and engineering best practices.",
-      "url": "https://mdstudio.dev/blog",
-      "author": { "@type": "Person", "name": "Adil Hussain" },
-      "blogPost": blogPosts.map(p => ({
-        "@type": "BlogPosting",
-        "headline": p.title,
-        "description": p.excerpt,
-        "url": `https://mdstudio.dev/blog/${p.slug}`,
-        "datePublished": p.dateISO,
+    schema: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "MD Studio Engineering Blog",
+        "description": "Deep-dives on AI development, SaaS architecture, and engineering best practices.",
+        "url": "https://mdstudio.dev/blog",
         "author": { "@type": "Person", "name": "Adil Hussain" },
-        "keywords": p.tags.join(", "),
-      })),
-    },
+        "blogPost": blogPosts.map(p => ({
+          "@type": "BlogPosting",
+          "headline": p.title,
+          "description": p.excerpt,
+          "url": `https://mdstudio.dev/blog/${p.slug}`,
+          "datePublished": p.dateISO,
+          "author": { "@type": "Person", "name": "Adil Hussain" },
+          "keywords": p.tags.join(", "),
+        })),
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mdstudio.dev/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://mdstudio.dev/blog" },
+        ],
+      },
+    ],
   });
 
   const filtered = blogPosts.filter(p => {
