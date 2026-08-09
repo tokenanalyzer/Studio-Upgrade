@@ -17,7 +17,7 @@ const socials = [
   { Icon: Github,    href: "https://github.com/tokenanalyzer", label: "GitHub"      },
   { Icon: Twitter,   href: "https://x.com/Husain3413",         label: "Twitter / X" },
   { Icon: Instagram, href: "https://instagram.com/dil_3413",   label: "Instagram"   },
-  { Icon: Linkedin,  href: "https://linkedin.com",             label: "LinkedIn"    },
+  { Icon: Linkedin,  href: "https://www.linkedin.com/in/adil-husain-20a19534a/", label: "LinkedIn"    },
 ];
 
 export default function AboutSection() {

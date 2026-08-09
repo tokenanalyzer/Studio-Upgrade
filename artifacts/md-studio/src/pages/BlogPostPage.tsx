@@ -104,7 +104,7 @@ function BlogPostSEO({ slug }: { slug: string }) {
           "name": "Adil Hussain",
           "url": "https://mdstudio.dev",
           "image": "https://mdstudio.dev/adil-hussain.png",
-          "sameAs": ["https://github.com/mdstudio-adil", "https://linkedin.com/in/adilhussain-dev"]
+          "sameAs": ["https://github.com/mdstudio-adil", "https://www.linkedin.com/in/adil-husain-20a19534a/"]
         },
         "publisher": {
           "@type": "Organization",
