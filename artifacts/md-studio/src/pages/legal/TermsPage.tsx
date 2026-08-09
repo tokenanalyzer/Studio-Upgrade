@@ -1,8 +1,15 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { NAV_H } from "@/components/Navbar";
+import { usePageSEO } from "@/hooks/usePageSEO";
 
 export default function TermsPage() {
+  usePageSEO({
+    title: "Terms of Service",
+    description: "MD Studio's Terms of Service — the terms and conditions governing use of our website and software development services.",
+    canonical: "/terms",
+  });
+
   return (
     <>
       <Navbar />

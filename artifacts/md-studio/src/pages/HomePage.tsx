@@ -17,8 +17,15 @@ import CTASection from "@/components/CTASection";
 import ContactSection from "@/components/ContactSection";
 import FloatingButtons from "@/components/FloatingButtons";
 import Footer from "@/components/Footer";
+import { usePageSEO } from "@/hooks/usePageSEO";
 
 export default function HomePage() {
+  usePageSEO({
+    title: "MD Studio — Full Stack & AI Development Agency by Adil Hussain",
+    description: "MD Studio is a boutique software agency by Adil Hussain — Full Stack Developer & AI Engineer. We build scalable web apps, AI agents, SaaS platforms, and mobile products that create real business impact.",
+    canonical: "/",
+  });
+
   return (
     <>
       <Navbar />

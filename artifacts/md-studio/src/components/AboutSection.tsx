@@ -86,17 +86,20 @@ export default function AboutSection() {
                 marginBottom: "1.5rem",
                 flexShrink: 0,
               }}>
-                <img
-                  src={`${import.meta.env.BASE_URL}adil-hussain.png`}
-                  alt="Adil Hussain — Full Stack Developer & AI Engineer"
-                  loading="lazy"
-                  style={{
-                    width: "100%", height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center 12%",
-                    display: "block",
-                  }}
-                />
+                <picture>
+                  <source srcSet={`${import.meta.env.BASE_URL}adil-hussain.webp`} type="image/webp" />
+                  <img
+                    src={`${import.meta.env.BASE_URL}adil-hussain.png`}
+                    alt="Adil Hussain — Full Stack Developer & AI Engineer"
+                    loading="lazy"
+                    style={{
+                      width: "100%", height: "100%",
+                      objectFit: "cover",
+                      objectPosition: "center 12%",
+                      display: "block",
+                    }}
+                  />
+                </picture>
               </div>
 
               {/* Name & title */}

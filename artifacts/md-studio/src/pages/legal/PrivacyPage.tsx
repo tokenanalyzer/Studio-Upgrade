@@ -1,8 +1,15 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { NAV_H } from "@/components/Navbar";
+import { usePageSEO } from "@/hooks/usePageSEO";
 
 export default function PrivacyPage() {
+  usePageSEO({
+    title: "Privacy Policy",
+    description: "MD Studio's Privacy Policy — how we collect, use, and protect your personal data when you visit our website or engage our software development services.",
+    canonical: "/privacy",
+  });
+
   return (
     <>
       <Navbar />
