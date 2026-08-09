@@ -3,7 +3,6 @@
 
 User-agent: *
 Allow: /
-Disallow: /admin
 
 # Allow major AI crawlers for GEO (Generative Engine Optimization)
 User-agent: GPTBot

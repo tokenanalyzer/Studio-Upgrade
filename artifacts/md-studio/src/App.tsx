@@ -5,7 +5,6 @@ import HomePage from "@/pages/HomePage";
 import NotFound from "@/pages/not-found";
 import PrivacyPage from "@/pages/legal/PrivacyPage";
 import TermsPage from "@/pages/legal/TermsPage";
-import AdminPage from "@/pages/AdminPage";
 import BlogPage from "@/pages/BlogPage";
 import BlogPostPage from "@/pages/BlogPostPage";
 
@@ -21,7 +20,6 @@ function Router() {
       <Route path="/" component={HomePage} />
       <Route path="/privacy" component={PrivacyPage} />
       <Route path="/terms" component={TermsPage} />
-      <Route path="/admin" component={AdminPage} />
       <Route path="/blog" component={BlogPage} />
       <Route path="/blog/:slug" component={BlogPostPage} />
       <Route component={NotFound} />

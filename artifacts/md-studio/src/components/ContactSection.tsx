@@ -11,7 +11,7 @@ const socials = [
   { Icon: Github,    label: "GitHub",      href: "https://github.com/tokenanalyzer",   handle: "@tokenanalyzer" },
   { Icon: Twitter,   label: "Twitter / X", href: "https://x.com/Husain3413",           handle: "@Husain3413"    },
   { Icon: Instagram, label: "Instagram",   href: "https://instagram.com/dil_3413",     handle: "@dil_3413"      },
-  { Icon: Linkedin,  label: "LinkedIn",    href: "https://linkedin.com",               handle: "Adil Hussain"   },
+  { Icon: Linkedin,  label: "LinkedIn",    href: "https://www.linkedin.com/in/adil-husain-20a19534a/", handle: "Adil Hussain"   },
 ];
 
 type FormData = { name: string; email: string; budget: string; message: string };

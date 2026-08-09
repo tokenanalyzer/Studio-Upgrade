@@ -17,7 +17,7 @@ const socials = [
   { Icon: Github,    href: "https://github.com/tokenanalyzer", label: "GitHub"      },
   { Icon: Twitter,   href: "https://x.com/Husain3413",         label: "Twitter / X" },
   { Icon: Instagram, href: "https://instagram.com/dil_3413",   label: "Instagram"   },
-  { Icon: Linkedin,  href: "https://linkedin.com",             label: "LinkedIn"    },
+  { Icon: Linkedin,  href: "https://www.linkedin.com/in/adil-husain-20a19534a/", label: "LinkedIn"    },
 ];
 
 export default function AboutSection() {
@@ -86,17 +86,20 @@ export default function AboutSection() {
                 marginBottom: "1.5rem",
                 flexShrink: 0,
               }}>
-                <img
-                  src={`${import.meta.env.BASE_URL}adil-hussain.png`}
-                  alt="Adil Hussain — Full Stack Developer & AI Engineer"
-                  loading="lazy"
-                  style={{
-                    width: "100%", height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center 12%",
-                    display: "block",
-                  }}
-                />
+                <picture>
+                  <source srcSet={`${import.meta.env.BASE_URL}adil-hussain.webp`} type="image/webp" />
+                  <img
+                    src={`${import.meta.env.BASE_URL}adil-hussain.png`}
+                    alt="Adil Hussain — Full Stack Developer & AI Engineer"
+                    loading="lazy"
+                    style={{
+                      width: "100%", height: "100%",
+                      objectFit: "cover",
+                      objectPosition: "center 12%",
+                      display: "block",
+                    }}
+                  />
+                </picture>
               </div>
 
               {/* Name & title */}
@@ -175,6 +178,40 @@ export default function AboutSection() {
                     </div>
                   ))}
                 </div>
+              </div>
+
+              {/* Also building */}
+              <div style={{ marginBottom: "1.75rem" }}>
+                <p style={{ fontSize: "0.82rem", fontWeight: 600, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.75rem" }}>Also Building</p>
+                <a
+                  href="https://loanmanagerapp.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "flex", alignItems: "center", gap: "0.85rem",
+                    padding: "0.9rem 1.1rem", background: "white", border: "1px solid #E2E8F0",
+                    borderRadius: "1rem", textDecoration: "none", transition: "all 0.2s ease",
+                    maxWidth: "380px",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = "#BFDBFE"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(37,99,235,0.08)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = "#E2E8F0"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+                >
+                  <picture>
+                    <source srcSet={`${import.meta.env.BASE_URL}loan-manager-logo.webp`} type="image/webp" />
+                    <img
+                      src={`${import.meta.env.BASE_URL}loan-manager-logo.png`}
+                      alt="Loan Manager logo"
+                      loading="lazy"
+                      width={44}
+                      height={49}
+                      style={{ width: "44px", height: "49px", objectFit: "contain", flexShrink: 0, borderRadius: "10px" }}
+                    />
+                  </picture>
+                  <div>
+                    <div style={{ fontSize: "0.92rem", fontWeight: 700, color: "#0f172a" }}>Loan Manager</div>
+                    <div style={{ fontSize: "0.78rem", color: "#64748B" }}>Co-founder &amp; Developer · loanmanagerapp.com</div>
+                  </div>
+                </a>
               </div>
 
               <button onClick={() => { const el = document.querySelector("#contact"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} className="btn-primary">
